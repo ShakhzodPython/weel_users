@@ -19386,3 +19386,693 @@ WHERE roles.name = $1::VARCHAR
 IP: 127.0.0.1 | 2024-09-06 | 17:07:56.466 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13556 | [cached since 68.72s ago] ('SUPERUSER',)
 IP: 127.0.0.1 | 2024-09-06 | 17:07:56.467 | SUCCESS | root:success:13 | Thread 13556 | Токен успешно обновлён для администратора с UUID: 9aa4d48a-d8b7-41af-a143-77b1f034fbcd
 IP: 127.0.0.1 | 2024-09-06 | 17:07:56.468 | INFO | sqlalchemy.engine.Engine:_connection_rollback_impl:2702 | Thread 13556 | ROLLBACK
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.025 | INFO | root:refresh_token:88 | Thread 5352 | Попытка создания refresh token
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.074 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 5352 | select pg_catalog.version()
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.074 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 5352 | [raw sql] ()
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.076 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 5352 | select current_schema()
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.076 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 5352 | [raw sql] ()
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.077 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 5352 | show standard_conforming_strings
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.077 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 5352 | [raw sql] ()
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.078 | INFO | sqlalchemy.engine.Engine:_connection_begin_impl:2699 | Thread 5352 | BEGIN (implicit)
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.082 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 5352 | SELECT roles.id, roles.name, roles.description, roles.created_at 
+FROM roles 
+WHERE roles.name = $1::VARCHAR
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.083 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 5352 | [generated in 0.00032s] ('SUPERUSER',)
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.084 | SUCCESS | root:success:13 | Thread 5352 | Токен успешно обновлён для администратора с UUID: 9aa4d48a-d8b7-41af-a143-77b1f034fbcd
+IP: 127.0.0.1 | 2024-09-06 | 17:51:21.085 | INFO | sqlalchemy.engine.Engine:_connection_rollback_impl:2702 | Thread 5352 | ROLLBACK
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.608 | INFO | root:refresh_token:122 | Thread 12608 | Попытка создания refresh token
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.676 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | select pg_catalog.version()
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.676 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | [raw sql] ()
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.680 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | select current_schema()
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.680 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | [raw sql] ()
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.682 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | show standard_conforming_strings
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.682 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | [raw sql] ()
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.683 | INFO | sqlalchemy.engine.Engine:_connection_begin_impl:2699 | Thread 12608 | BEGIN (implicit)
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.688 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | SELECT roles.id, roles.name, roles.description, roles.created_at 
+FROM roles 
+WHERE roles.name = $1::VARCHAR
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.688 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | [generated in 0.00029s] ('USER',)
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.701 | SUCCESS | root:success:13 | Thread 12608 | Токен успешно обновлён для пользователя ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 12:20:59.702 | INFO | sqlalchemy.engine.Engine:_connection_rollback_impl:2702 | Thread 12608 | ROLLBACK
+IP: 127.0.0.1 | 2024-09-07 | 12:21:40.204 | INFO | root:refresh_token:88 | Thread 12608 | Попытка создания refresh token
+IP: 127.0.0.1 | 2024-09-07 | 12:21:40.206 | INFO | sqlalchemy.engine.Engine:_connection_begin_impl:2699 | Thread 12608 | BEGIN (implicit)
+IP: 127.0.0.1 | 2024-09-07 | 12:21:40.206 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | SELECT roles.id, roles.name, roles.description, roles.created_at 
+FROM roles 
+WHERE roles.name = $1::VARCHAR
+IP: 127.0.0.1 | 2024-09-07 | 12:21:40.206 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | [cached since 40.52s ago] ('SUPERUSER',)
+IP: 127.0.0.1 | 2024-09-07 | 12:21:40.207 | SUCCESS | root:success:13 | Thread 12608 | Токен успешно обновлён для администратора с UUID: 9aa4d48a-d8b7-41af-a143-77b1f034fbcd
+IP: 127.0.0.1 | 2024-09-07 | 12:21:40.208 | INFO | sqlalchemy.engine.Engine:_connection_rollback_impl:2702 | Thread 12608 | ROLLBACK
+IP: 127.0.0.1 | 2024-09-07 | 14:13:59.971 | INFO | root:refresh_token:88 | Thread 12608 | Попытка создания refresh token
+IP: 127.0.0.1 | 2024-09-07 | 14:13:59.972 | INFO | sqlalchemy.engine.Engine:_connection_begin_impl:2699 | Thread 12608 | BEGIN (implicit)
+IP: 127.0.0.1 | 2024-09-07 | 14:13:59.973 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | SELECT roles.id, roles.name, roles.description, roles.created_at 
+FROM roles 
+WHERE roles.name = $1::VARCHAR
+IP: 127.0.0.1 | 2024-09-07 | 14:13:59.974 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | [cached since 6780s ago] ('SUPERUSER',)
+IP: 127.0.0.1 | 2024-09-07 | 14:13:59.975 | SUCCESS | root:success:13 | Thread 12608 | Токен успешно обновлён для администратора с UUID: 9aa4d48a-d8b7-41af-a143-77b1f034fbcd
+IP: 127.0.0.1 | 2024-09-07 | 14:13:59.976 | INFO | sqlalchemy.engine.Engine:_connection_rollback_impl:2702 | Thread 12608 | ROLLBACK
+IP: 127.0.0.1 | 2024-09-07 | 14:14:09.109 | INFO | root:refresh_token:88 | Thread 12608 | Попытка создания refresh token
+IP: 127.0.0.1 | 2024-09-07 | 15:17:01.591 | INFO | root:refresh_token:88 | Thread 12608 | Попытка создания refresh token
+IP: 127.0.0.1 | 2024-09-07 | 15:17:06.313 | INFO | root:refresh_token:88 | Thread 12608 | Попытка создания refresh token
+IP: 127.0.0.1 | 2024-09-07 | 15:17:06.313 | ERROR | root:refresh_token:100 | Thread 12608 | Refresh token истек
+IP: 127.0.0.1 | 2024-09-07 | 15:17:16.839 | INFO | root:refresh_token:88 | Thread 12608 | Попытка создания refresh token
+IP: 127.0.0.1 | 2024-09-07 | 15:17:16.840 | INFO | sqlalchemy.engine.Engine:_connection_begin_impl:2699 | Thread 12608 | BEGIN (implicit)
+IP: 127.0.0.1 | 2024-09-07 | 15:17:16.840 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | SELECT roles.id, roles.name, roles.description, roles.created_at 
+FROM roles 
+WHERE roles.name = $1::VARCHAR
+IP: 127.0.0.1 | 2024-09-07 | 15:17:16.840 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 12608 | [cached since 1.058e+04s ago] ('SUPERUSER',)
+IP: 127.0.0.1 | 2024-09-07 | 15:17:16.842 | SUCCESS | root:success:13 | Thread 12608 | Токен успешно обновлён для администратора с UUID: 9aa4d48a-d8b7-41af-a143-77b1f034fbcd
+IP: 127.0.0.1 | 2024-09-07 | 15:17:16.842 | INFO | sqlalchemy.engine.Engine:_connection_rollback_impl:2702 | Thread 12608 | ROLLBACK
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.385 | INFO | root:refresh_token:88 | Thread 13836 | Попытка создания refresh token
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.434 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13836 | select pg_catalog.version()
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.434 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13836 | [raw sql] ()
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.435 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13836 | select current_schema()
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.436 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13836 | [raw sql] ()
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.437 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13836 | show standard_conforming_strings
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.437 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13836 | [raw sql] ()
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.438 | INFO | sqlalchemy.engine.Engine:_connection_begin_impl:2699 | Thread 13836 | BEGIN (implicit)
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.442 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13836 | SELECT roles.id, roles.name, roles.description, roles.created_at 
+FROM roles 
+WHERE roles.name = $1::VARCHAR
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.443 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13836 | [generated in 0.00042s] ('SUPERUSER',)
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.444 | SUCCESS | root:success:13 | Thread 13836 | Токен успешно обновлён для администратора с UUID: 9aa4d48a-d8b7-41af-a143-77b1f034fbcd
+IP: 127.0.0.1 | 2024-09-07 | 16:18:24.445 | INFO | sqlalchemy.engine.Engine:_connection_rollback_impl:2702 | Thread 13836 | ROLLBACK
+IP: 127.0.0.1 | 2024-09-07 | 16:21:05.958 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: 9aa4d48a-d8b7-41af-a143-77b1f034fbcd
+IP: 127.0.0.1 | 2024-09-07 | 16:21:05.958 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:21:07.997 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:21:07.998 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:21:07.998 | ERROR | root:get_cards:38 | Thread 13836 | Uzcard ID не найден или просрочен
+IP: 127.0.0.1 | 2024-09-07 | 16:21:07.999 | ERROR | root:get_cards:60 | Thread 13836 | 404: Uzcard ID not found or expired
+IP: 127.0.0.1 | 2024-09-07 | 16:22:06.700 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:22:06.700 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:22:08.750 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:22:08.751 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:22:08.752 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:22:08.753 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:22:08.908 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:22:08.966 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DED96810>
+IP: 127.0.0.1 | 2024-09-07 | 16:22:08.966 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBC680> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.008 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF1D3D0>
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.008 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.009 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.009 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.009 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.009 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.152 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:22:09 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.154 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.155 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.156 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.156 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.157 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.157 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.158 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.158 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:22:09.160 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:22:52.828 | INFO | root:refresh_token:122 | Thread 13836 | Попытка создания refresh token
+IP: 127.0.0.1 | 2024-09-07 | 16:22:52.828 | INFO | sqlalchemy.engine.Engine:_connection_begin_impl:2699 | Thread 13836 | BEGIN (implicit)
+IP: 127.0.0.1 | 2024-09-07 | 16:22:52.829 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13836 | SELECT roles.id, roles.name, roles.description, roles.created_at 
+FROM roles 
+WHERE roles.name = $1::VARCHAR
+IP: 127.0.0.1 | 2024-09-07 | 16:22:52.829 | INFO | sqlalchemy.engine.Engine:_execute_context:1846 | Thread 13836 | [cached since 268.4s ago] ('USER',)
+IP: 127.0.0.1 | 2024-09-07 | 16:22:52.830 | SUCCESS | root:success:13 | Thread 13836 | Токен успешно обновлён для пользователя ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:22:52.831 | INFO | sqlalchemy.engine.Engine:_connection_rollback_impl:2702 | Thread 13836 | ROLLBACK
+IP: 127.0.0.1 | 2024-09-07 | 16:25:28.402 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:25:28.403 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.454 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.454 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.455 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.456 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.606 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.638 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DED96810>
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.638 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBFAD0> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.668 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF7D5D0>
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.668 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.669 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.669 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.669 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.669 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.802 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:25:31 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.803 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.804 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.804 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.804 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.805 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.805 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.805 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.806 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:25:30.806 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:28:30.268 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:28:30.269 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.323 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.324 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.326 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.328 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.484 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.513 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF6D110>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.513 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBF4A0> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.546 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF6D4D0>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.547 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.547 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.547 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.548 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.548 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.669 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:28:33 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.670 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.671 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.672 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.672 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.673 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.673 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.674 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.674 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:28:32.674 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:28:57.478 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:28:57.478 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.531 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.531 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.532 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.533 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.686 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.717 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF7C510>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.717 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBF2F0> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.747 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF7FD90>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.747 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.748 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.748 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.748 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.748 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.856 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:29:00 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.858 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.858 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.859 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.859 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.860 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.860 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.860 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.861 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:28:59.861 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:29:44.162 | ERROR | root:get_api_key:163 | Thread 7160 | Вы забыли указать API_KEY
+IP: 127.0.0.1 | 2024-09-07 | 16:30:36.451 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:30:36.451 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.494 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.494 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.495 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.496 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.650 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.680 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF1D250>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.682 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBED50> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.713 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEDD0290>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.713 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.714 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.714 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.714 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.714 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.856 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:30:39 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.856 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.856 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.856 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.857 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.857 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.857 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.858 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.858 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:30:38.858 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:30:51.653 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:30:51.653 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.705 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.707 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.707 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.708 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.855 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.886 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DED96810>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.887 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBF530> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.919 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8E010>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.920 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.921 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.922 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.922 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:30:53.923 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:54.048 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:30:54 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:30:54.049 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:30:54.050 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:30:54.050 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:30:54.051 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:30:54.051 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:30:54.051 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:30:54.052 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:30:54.052 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:30:54.053 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:31:21.998 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:31:21.998 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.049 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.051 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.051 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.051 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.198 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.228 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8E190>
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.228 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBFAD0> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.260 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8F8D0>
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.262 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.262 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.262 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.263 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.263 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.389 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:31:24 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.392 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.392 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.393 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.393 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.393 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.393 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.393 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.394 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:31:24.394 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:34:01.849 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:34:01.850 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:34:03.898 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:34:03.900 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:34:03.901 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:34:03.903 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.055 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.101 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF7FE50>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.101 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBF920> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.132 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF7E210>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.132 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.133 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.133 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.133 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.133 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.255 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:34:04 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.257 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.257 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.258 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.258 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.259 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.259 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.260 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.260 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:34:04.261 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:34:41.385 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:34:41.385 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.439 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.440 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.441 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.442 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.595 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.624 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEED8210>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.625 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEF98290> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.655 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF1D4D0>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.655 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.656 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.656 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.656 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.656 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.778 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:34:44 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.780 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.781 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.782 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.782 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.783 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.784 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.784 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.784 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:34:43.785 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:34:55.316 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:34:55.316 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.372 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.373 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.374 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.375 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.529 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.573 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8F7D0>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.574 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBFDA0> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.610 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF6D590>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.610 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.611 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.611 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.611 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.611 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.746 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:34:58 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.747 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.748 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.748 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.749 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.749 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.750 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.750 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.751 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:34:57.751 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:37:24.606 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:37:24.606 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.661 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.662 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.662 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.663 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.827 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.860 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF5F310>
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.860 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEF98320> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.891 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8F950>
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.892 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.892 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.892 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.892 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:37:26.892 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:37:27.017 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:37:27 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:37:27.019 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:37:27.019 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:37:27.020 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:37:27.020 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:37:27.021 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:37:27.021 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:37:27.023 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:37:27.023 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:37:27.024 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:39:00.928 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:39:00.929 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:39:02.965 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:39:02.966 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:39:02.967 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:39:02.968 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.123 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.167 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8AA50>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.168 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBF140> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.198 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8AA90>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.199 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.199 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.199 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.200 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.200 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.306 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:39:03 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.307 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.307 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.308 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.308 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.308 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.309 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.309 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.309 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:39:03.310 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:39:34.693 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:39:34.694 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.740 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.741 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.741 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.742 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.889 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.921 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF7FF90>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.921 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEF983B0> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.953 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF7FC10>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.954 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.955 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.955 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.955 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:36.956 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:37.079 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:39:37 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:39:37.079 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:39:37.080 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:37.080 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:37.080 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:39:37.080 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:37.080 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:39:37.080 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:37.081 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:39:37.081 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:39:51.283 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:39:51.283 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.326 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.327 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.328 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.329 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.486 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.517 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF6C210>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.518 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBFB60> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.552 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8D490>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.553 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.554 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.554 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.555 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.555 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.667 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:39:54 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.669 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.670 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.671 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.671 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.672 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.672 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.673 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.673 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:39:53.673 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:39:54.266 | INFO | root:card_payment:213 | Thread 13836 | Попытка снятия средств с карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:39:54.267 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:39:56.305 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:39:56.306 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:39:56.307 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.353 | INFO | root:get_card_phone:136 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.354 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.356 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.358 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.513 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.543 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8C7D0>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.543 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEF98830> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.575 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8D1D0>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.576 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.576 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.576 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.576 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:58.577 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:59.026 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:39:59 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:39:59.027 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:39:59.027 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:39:59.027 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:59.028 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:39:59.028 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:59.028 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:39:59.028 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:39:59.029 | SUCCESS | root:success:13 | Thread 13836 | Средства успешно сняты
+IP: 127.0.0.1 | 2024-09-07 | 16:39:59.029 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:40:01.081 | INFO | root:save_transaction_id:152 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:40:01.083 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:40:01.084 | SUCCESS | root:success:13 | Thread 13836 | Со пользователь с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f успешно сняты средства
+IP: 127.0.0.1 | 2024-09-07 | 16:43:01.544 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:43:01.544 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.569 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.570 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.570 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.571 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.719 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.770 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF8B710>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.770 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEF98170> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.805 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEFA2190>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.805 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.806 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.806 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.807 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.807 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.940 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:43:04 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.942 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.942 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.943 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.944 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.944 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.944 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.945 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.945 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:43:03.946 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:43:04.367 | INFO | root:card_payment:213 | Thread 13836 | Попытка снятия средств с карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:43:04.367 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:43:06.406 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:43:06.409 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:43:06.409 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.455 | INFO | root:get_card_phone:136 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.457 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.457 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.458 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.606 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.636 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF1EB50>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.636 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEF99490> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.668 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DED96810>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.668 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.669 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.669 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.670 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:43:08.670 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:09.084 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:43:09 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:43:09.086 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:43:09.087 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:43:09.088 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:43:09.088 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:43:09.088 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:43:09.088 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:43:09.088 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:43:09.088 | SUCCESS | root:success:13 | Thread 13836 | Средства успешно сняты
+IP: 127.0.0.1 | 2024-09-07 | 16:43:09.088 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:43:11.124 | INFO | root:save_transaction_id:152 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:43:11.125 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:43:11.126 | SUCCESS | root:success:13 | Thread 13836 | Со пользователь с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f успешно сняты средства
+IP: 127.0.0.1 | 2024-09-07 | 16:44:11.544 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:44:11.544 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.576 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.578 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.579 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.581 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.733 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.762 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEFA3050>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.762 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBC4D0> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.795 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEFA2450>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.795 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.796 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.796 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.796 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.797 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.919 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:44:14 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.922 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.922 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.923 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.924 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.924 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.924 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.924 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.924 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:44:13.925 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:44:14.357 | INFO | root:card_payment:213 | Thread 13836 | Попытка снятия средств с карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:44:14.358 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:44:16.395 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:44:16.397 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:44:16.398 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.448 | INFO | root:get_card_phone:136 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.450 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.451 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.452 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.606 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.636 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DE667B10>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.636 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEF991C0> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.669 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEDD0290>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.670 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.671 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.671 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.671 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:44:18.671 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:19.080 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:44:19 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:44:19.082 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:44:19.083 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:44:19.084 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:44:19.084 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:44:19.084 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:44:19.084 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:44:19.084 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:44:19.085 | SUCCESS | root:success:13 | Thread 13836 | Средства успешно сняты
+IP: 127.0.0.1 | 2024-09-07 | 16:44:19.085 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:44:21.130 | INFO | root:save_transaction_id:152 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:44:21.131 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:44:21.131 | SUCCESS | root:success:13 | Thread 13836 | Со пользователь с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f успешно сняты средства
+IP: 127.0.0.1 | 2024-09-07 | 16:45:21.539 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:45:21.539 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.596 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.597 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.597 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.598 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.752 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.782 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF7C6D0>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.782 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBF9B0> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.815 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF1D410>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.815 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.816 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.816 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.816 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.816 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.933 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:45:24 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.935 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.936 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.937 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.937 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.937 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.937 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.938 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.938 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:45:23.938 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:45:24.352 | INFO | root:card_payment:213 | Thread 13836 | Попытка снятия средств с карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:45:24.352 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:45:26.408 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:45:26.410 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:45:26.410 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.461 | INFO | root:get_card_phone:136 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.461 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.461 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.462 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.609 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.639 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF6F950>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.640 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBF4A0> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.669 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEF6E550>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.669 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.669 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.669 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.670 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:45:28.670 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:29.028 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:45:29 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:45:29.030 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:45:29.031 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:45:29.031 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:45:29.032 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:45:29.032 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:45:29.032 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:45:29.032 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:45:29.032 | SUCCESS | root:success:13 | Thread 13836 | Средства успешно сняты
+IP: 127.0.0.1 | 2024-09-07 | 16:45:29.033 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:45:31.080 | INFO | root:save_transaction_id:152 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:45:31.082 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:45:31.082 | SUCCESS | root:success:13 | Thread 13836 | Со пользователь с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f успешно сняты средства
+IP: 127.0.0.1 | 2024-09-07 | 16:46:31.491 | INFO | root:get_cards:32 | Thread 13836 | Попытка получения кредитной карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:46:31.492 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.532 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.534 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.535 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.537 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.686 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.735 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEFA3E50>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.735 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBEF90> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.767 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEFA2E10>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.767 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.767 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.768 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.768 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.768 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.904 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:46:34 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.906 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.907 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.908 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.908 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.908 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.908 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.908 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.909 | SUCCESS | root:success:13 | Thread 13836 | Данные успешно получены
+IP: 127.0.0.1 | 2024-09-07 | 16:46:33.909 | SUCCESS | root:success:13 | Thread 13836 | Кредитная карта пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f получена успешно
+IP: 127.0.0.1 | 2024-09-07 | 16:46:34.300 | INFO | root:card_payment:213 | Thread 13836 | Попытка снятия средств с карты пользователя с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f
+IP: 127.0.0.1 | 2024-09-07 | 16:46:34.301 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:46:36.324 | INFO | root:get_uzcard_id:103 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:46:36.324 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:46:36.324 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.352 | INFO | root:get_card_phone:136 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.352 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.352 | DEBUG | httpx:load_ssl_context:80 | Thread 13836 | load_ssl_context verify=True cert=None trust_env=True http2=False
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.354 | DEBUG | httpx:load_ssl_context_verify:146 | Thread 13836 | load_verify_locations cafile='C:\\Users\\user\\Desktop\\weel_users\\venv\\Lib\\site-packages\\certifi\\cacert.pem'
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.508 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.started host='api.upay.uz' port=443 local_address=None timeout=5.0 socket_options=None
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.556 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEECFA90>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.557 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000208DEDBF020> server_hostname='api.upay.uz' timeout=5.0
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.587 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000208DEECFDD0>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.588 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.588 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_headers.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.588 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.589 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | send_request_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.589 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.983 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx'), (b'Date', b'Sat, 07 Sep 2024 11:46:39 GMT'), (b'Content-Type', b'text/xml; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Vary', b'Accept-Encoding'), (b'User-Remote-Ip-Address', b'84.54.122.176'), (b'X-XSS-Protection', b'1; mode=block'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'no-referrer-when-downgrade'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Content-Security-Policy', b'frame-ancestors http://*.upay.uz https://*.upay.uz'), (b'Permissions-Policy', b'interest-cohort=()'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Permitted-Cross-Domain-Policies', b'master-only'), (b'Feature-Policy', b"camera 'none'; microphone 'none'; geolocation *"), (b'Expect-CT', b'max-age=86400, enforce, report-uri="https://upay.uz/ct_report"'), (b'Content-Encoding', b'gzip')])
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.984 | INFO | httpx:_send_single_request:1773 | Thread 13836 | HTTP Request: POST https://api.upay.uz/STAPI/STWS?wsdl "HTTP/1.1 200 OK"
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.985 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.started request=<Request [b'POST']>
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.985 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | receive_response_body.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.986 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.started
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.986 | DEBUG | httpcore.http11:atrace:85 | Thread 13836 | response_closed.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.986 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.started
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.987 | DEBUG | httpcore.connection:atrace:85 | Thread 13836 | close.complete
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.987 | SUCCESS | root:success:13 | Thread 13836 | Средства успешно сняты
+IP: 127.0.0.1 | 2024-09-07 | 16:46:38.988 | DEBUG | aioredis:create_connection:110 | Thread 13836 | Creating tcp connection to ('localhost', 6379)
+IP: 127.0.0.1 | 2024-09-07 | 16:46:41.020 | INFO | root:save_transaction_id:152 | Thread 13836 | Redis успешно закрыт
+IP: 127.0.0.1 | 2024-09-07 | 16:46:41.021 | DEBUG | aioredis:_do_close:158 | Thread 13836 | Closed 1 connection(s)
+IP: 127.0.0.1 | 2024-09-07 | 16:46:41.022 | SUCCESS | root:success:13 | Thread 13836 | Со пользователь с UUID: ba05def6-a95e-4af5-8482-27a51321eb4f успешно сняты средства

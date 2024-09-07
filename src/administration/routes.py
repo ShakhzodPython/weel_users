@@ -1,5 +1,3 @@
-import time
-
 import jwt
 from typing import List
 from uuid import UUID
