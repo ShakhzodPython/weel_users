@@ -148,7 +148,7 @@ async def is_courier(token: str = Depends(JWTBearer()),
     user = stmt.scalars().one_or_none()
 
     if not user:
-        logger.error(f"Пользователь с {user_id} не найден")
+        logger.error(f"Курьер с UUID: {user_id} не найден")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Courier not found")
 
     # Проверка, является ли пользователь суперпользователем
@@ -157,8 +157,25 @@ async def is_courier(token: str = Depends(JWTBearer()),
     return user
 
 
+async def is_restaurant_editor(token: str = Depends(JWTBearer()),
+                               db: AsyncSession = Depends(get_db)):
+    payload = decode_access_token(token)
+    user_id = payload.get("user_id")
+    stmt = await db.execute(select(User).options(selectinload(User.roles)).where(User.id == user_id))
+    user = stmt.scalars().one_or_none()
+
+    if not user:
+        logger.error(f"Редактор ресторана с UUID: {user_id} не найден")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Restaurant editor not found")
+
+    # Проверка, является ли пользователь суперпользователем
+    if any(role.name == "SUPERUSER" for role in user.roles):
+        return user
+    return user
+
+
 # С помощью этой функций разработчик клиентской стороны будет должен передавать api_key в заголовках
-def get_api_key(api_key: str = Header(None)):
+def get_api_key(api_key: str):
     if api_key is None:
         logger.error("Вы забыли указать API_KEY")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="API KEY not found")

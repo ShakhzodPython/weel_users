@@ -30,7 +30,7 @@ async def sign_up(username: str = Form(...),
 
     stmt = await db.execute(select(Role).where(Role.name == "SUPERUSER"))
     role = stmt.scalars().one_or_none()
-    if not role:
+    if role is None:
         logger.error("Роль: SUPERUSER не найдена")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
 
@@ -54,13 +54,11 @@ async def sign_up(username: str = Form(...),
 @router_admin.post("/api/v1/auth/superusers/sign_in/", status_code=status.HTTP_200_OK)
 async def sign_in(username: str = Form(...),
                   password: str = Form(...),
-                  api_key: str = Depends(get_api_key),
                   db: AsyncSession = Depends(get_db)):
     logger.info(f"Попытка входа в аккаунт с именем пользователя: {username}")
 
-    stmt = await db.execute(select(User).options(selectinload(User.roles)).where(
+    superuser = await db.scalar(select(User).options(selectinload(User.roles)).where(
         User.roles.any(name="SUPERUSER"), User.username == username))
-    superuser = stmt.scalars().one_or_none()
 
     if superuser is None or not superuser.verify_password(password):
         logger.error(f"Не верное имя пользователя или пароль")
@@ -81,7 +79,6 @@ async def sign_in(username: str = Form(...),
 
 @router_admin.post("/api/v1/superusers/token/refresh/", status_code=status.HTTP_201_CREATED)
 async def refresh_token(refresh_token: str,
-                        api_key: str = Depends(get_api_key),
                         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка создания refresh token")
 
@@ -112,7 +109,6 @@ async def refresh_token(refresh_token: str,
 @router_admin.get("/api/v1/superusers/", response_model=List[SuperuserSchemas], status_code=status.HTTP_200_OK)
 async def get_superusers(
         current_user: User = Depends(is_superuser),
-        api_key: str = Depends(get_api_key),
         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка получения всех администраторов")
 
@@ -125,9 +121,8 @@ async def get_superusers(
 
 @router_admin.get("/api/v1/superusers/{superuser_id}/", response_model=SuperuserSchemas, status_code=status.HTTP_200_OK)
 async def get_superuser_by_id(superuser_id: UUID,
-                              current_user: User = Depends( is_superuser),
-                              db: AsyncSession = Depends(get_db),
-                              api_key: str = Depends(get_api_key)):
+                              current_user: User = Depends(is_superuser),
+                              db: AsyncSession = Depends(get_db)):
     logger.info(f"Попытка получения администратора с UUID: {superuser_id}")
 
     if superuser_id != current_user.id:
@@ -149,9 +144,8 @@ async def get_superuser_by_id(superuser_id: UUID,
 
 @router_admin.put("/api/v1/superusers/{superuser_id}/", response_model=SuperuserSchemas, status_code=status.HTTP_200_OK)
 async def update_superuser(superuser_id: UUID,
-                           superuser_update: SuperuserUpdate,
+                           objects: SuperuserUpdate,
                            current_user: User = Depends(is_superuser),
-                           api_key: str = Depends(get_api_key),
                            db: AsyncSession = Depends(get_db)):
     logger.info(f"Попытка обновления администратора с UUID: {superuser_id}")
 
@@ -170,25 +164,25 @@ async def update_superuser(superuser_id: UUID,
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Superuser not found")
 
     existing_superuser_email_stmt = await db.execute(select(User).options(selectinload(User.roles)).where(
-        User.roles.any(name="SUPERUSER"), User.email == superuser_update.email, User.id != superuser_id
+        User.roles.any(name="SUPERUSER"), User.email == objects.email, User.id != superuser_id
     ))
     existing_superuser_email = existing_superuser_email_stmt.scalars().one_or_none()
 
     existing_superuser_phone_number_stmt = await db.execute(select(User).options(selectinload(User.roles)).where(
-        User.roles.any(name="SUPERUSER"), User.phone_number == check_phone(superuser_update.phone_number),
+        User.roles.any(name="SUPERUSER"), User.phone_number == check_phone(objects.phone_number),
                                           User.id != superuser_id
     ))
     existing_superuser_phone_number = existing_superuser_phone_number_stmt.scalars().one_or_none()
 
     if existing_superuser_email:
-        logger.error(f"Администратор с email: {superuser_update.email} уже существует")
+        logger.error(f"Администратор с email: {objects.email} уже существует")
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Superuser with this email already exist")
     elif existing_superuser_phone_number:
-        logger.error(f"Администратор с номером телефона: {superuser_update.phone_number} уже существует")
+        logger.error(f"Администратор с номером телефона: {objects.phone_number} уже существует")
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="Superuser with this phone number already exist")
     else:
-        for var, value in superuser_update.dict(exclude_unset=True).items():
+        for var, value in objects.dict(exclude_unset=True).items():
             setattr(superuser, var, value)
 
     db.add(superuser)
@@ -202,8 +196,7 @@ async def update_superuser(superuser_id: UUID,
 @router_admin.delete("/api/v1/superusers/{superuser_id}/", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_superuser(superuser_id: UUID,
                            current_user: User = Depends(is_superuser),
-                           db: AsyncSession = Depends(get_db),
-                           api_key: str = Depends(get_api_key)):
+                           db: AsyncSession = Depends(get_db)):
     logger.info(f"Попытка удаления администратора с UUID: {superuser_id}")
 
     if superuser_id != current_user.id:
@@ -230,8 +223,7 @@ async def delete_superuser(superuser_id: UUID,
 @router_admin.get("/api/v1/roles/", status_code=status.HTTP_200_OK)
 async def get_roles(
         current_user: User = Depends(is_superuser),
-        db: AsyncSession = Depends(get_db),
-        api_key: str = Depends(get_api_key)):
+        db: AsyncSession = Depends(get_db)):
     logger.info("Попытка получения всех ролей")
 
     stmt = await db.execute(select(Role))
@@ -246,7 +238,6 @@ async def get_roles(
 @router_admin.get("/api/v1/roles/{role_id}/", status_code=status.HTTP_200_OK)
 async def get_role_by_id(role_id: int,
                          current_user: User = Depends(is_superuser),
-                         api_key: str = Depends(get_api_key),
                          db: AsyncSession = Depends(get_db)):
     logger.info(f"Попытка получить роль с ID: {role_id}")
 
@@ -273,7 +264,6 @@ async def create_role(
         name: str = Form(...),
         description: str = Form(...),
         current_user: User = Depends(is_superuser),
-        api_key: str = Depends(get_api_key),
         db: AsyncSession = Depends(get_db)):
     logger.info(f"Попытка создания роли c названием: {name}")
 
@@ -304,7 +294,7 @@ async def create_role(
 async def update_role(role_id: int,
                       name: str = Form(...),
                       description: str = Form(...),
-                      # current_user: User = Depends(is_superuser),
+                      current_user: User = Depends(is_superuser),
                       db: AsyncSession = Depends(get_db)):
     logger.info(f"Попытка обновить роль с ID: {role_id}")
 
@@ -341,6 +331,7 @@ async def update_role(role_id: int,
 
 @router_admin.delete("/api/v1/roles/{role_id}/", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_role(role_id: int,
+                      current_user: User = Depends(is_superuser),
                       db: AsyncSession = Depends(get_db)):
     logger.info(f"Попытка удаления роли с ID: {role_id}")
 
@@ -361,7 +352,6 @@ async def delete_role(role_id: int,
 async def change_roles(
         role_id: int,
         current_user: User = Depends(is_superuser),
-        api_key: str = Depends(get_api_key),
         db: AsyncSession = Depends(get_db)):
     logger.info(f"Попытка изменить роль пользователя с UUID: {current_user.id}")
 
@@ -375,13 +365,13 @@ async def change_roles(
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="Access denied: You don't have enough privileges")
 
-    if not user:
+    if user is None:
         logger.error(f"Пользователь с UUID: {current_user.id} не найден")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     stmt = await db.execute(select(Role).where(Role.id == role_id))
     role = stmt.scalars().one_or_none()
 
-    if not role:
+    if role is None:
         logger.error(f"Роль с ID: {role_id} не найдена")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
 

@@ -8,8 +8,8 @@ async def save_verification_code(phone_number: str, code: str):
     redis = None
     try:
         redis = await get_redis_connection()
-        await redis.set(f"verification_code:{code}", phone_number, expire=60)
-        await redis.set(f"phone_number:{phone_number}", code, expire=60)
+        await redis.set(f"verification_code:{code}", phone_number, expire=180)
+        await redis.set(f"phone_number:{phone_number}", code, expire=180)
         logger.success(f"Код подтверждения успешно сохранен для {phone_number}")
     except Exception as e:
         logger.error(f"Произошла ошибка при сохранений кода подтверждения: {e}")

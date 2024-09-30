@@ -6,13 +6,13 @@ from uuid import UUID
 from pydantic import BaseModel, EmailStr
 
 
-class CourierUpdate(BaseModel):
+class RestaurantEditorUpdate(BaseModel):
     username: Optional[str] = None
     full_name: Optional[str] = None
     email: Optional[EmailStr] = None
 
 
-class CourierSchemas(BaseModel):
+class RestaurantEditorSchemas(BaseModel):
     id: UUID
     username: str
     phone_number: Optional[str] = None

@@ -10,7 +10,7 @@ from database.settings import Base
 
 
 class Role(Base):
-    __tablename__ = 'roles'
+    __tablename__ = "roles"
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True, nullable=False)
     description = Column(Text)
@@ -18,7 +18,7 @@ class Role(Base):
 
 
 class User(Base):
-    __tablename__ = 'user'
+    __tablename__ = "user"
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
     username = Column(String(100), unique=True, nullable=True)
     hash_password = Column(String(128), nullable=True)
@@ -41,7 +41,7 @@ class User(Base):
 
 
 class Card(Base):
-    __tablename__ = 'cards'
+    __tablename__ = "cards"
     id = Column(Integer, primary_key=True)
     user_id = Column(UUID(as_uuid=True), ForeignKey('user.id'))
     user = relationship("User", back_populates="cards")

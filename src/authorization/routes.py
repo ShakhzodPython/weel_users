@@ -86,38 +86,34 @@ async def verify_code(code: str,
         # Сброс попыток после успешной верификации
         await reset_attempts(phone_number)
 
-        role_stmt = await db.execute(select(Role).where(Role.name == "USER"))
-        role = role_stmt.scalars().one_or_none()
+    role_stmt = await db.execute(select(Role).where(Role.name == "USER"))
+    role = role_stmt.scalars().one_or_none()
 
-        if not role:
-            logger.error("Роль: USER не найдена")
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
+    if role is None:
+        logger.error("Роль: USER не найдена")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
 
-        # Создание пользователя
-        user_stmt = await db.execute(select(User).where(User.phone_number == phone_number))
-        user = user_stmt.scalars().one_or_none()
-        if not user:
-            user = User(phone_number=phone_number, roles=[role])
-            db.add(user)
-            await db.commit()
-            await db.refresh(user)
+    # Создание пользователя
+    user = User(phone_number=phone_number, roles=[role])
+    db.add(user)
+    await db.commit()
+    await db.refresh(user)
 
     # генерация JWT токена
     logger.success(f"Пользователь {phone_number} успешно зарегистрирован c ролью {role.name}.")
-    access_token = create_access_token(data={"user_id": user.id, "phone_number": phone_number, "role": role.name})
+    access_token = create_access_token(data={"user_id": user.id, "role": role.name})
     refresh_token = create_refresh_token(
-        data={"user_id": user.id, "phone_number": phone_number, "role": role.name})
+        data={"user_id": user.id, "role": role.name})
 
     return {
         "access_token": access_token,
         "refresh_token": refresh_token,
-        "detail": f"Пользователь {phone_number} успешно зарегистрирован c ролью {role.name}.",
+        "detail": f"Пользователь: {phone_number} успешно зарегистрирован c ролью {role.name}.",
     }
 
 
 @router_auth.post("/api/v1/users/token/refresh/", status_code=status.HTTP_201_CREATED)
 async def refresh_token(refresh_token: str,
-                        api_key: str = Depends(get_api_key),
                         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка создания refresh token")
     try:
@@ -127,11 +123,6 @@ async def refresh_token(refresh_token: str,
         if user_role != "USER":
             logger.error("Не корректная роль")
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Incorrect role")
-
-        phone_number = payload.get("phone_number")
-        if not phone_number:
-            logger.error("Недействительный refresh token")
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid refresh token")
     except jwt.ExpiredSignatureError:
         logger.error("Refresh token истек")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Refresh token expired")
@@ -141,7 +132,7 @@ async def refresh_token(refresh_token: str,
     stmt = await db.execute(select(Role).where(Role.name == "USER"))
     role = stmt.scalars().one_or_none()
 
-    new_access_token = create_access_token(data={"user_id": user_id, "phone_number": phone_number, "role": role.name})
+    new_access_token = create_access_token(data={"user_id": user_id, "role": role.name})
     logger.success(f"Токен успешно обновлён для пользователя {user_id}")
     return {
         "access_token": new_access_token

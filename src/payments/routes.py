@@ -28,7 +28,7 @@ router_payment = APIRouter(
 
 @router_payment.get("/api/v1/cards/{user_id}/", status_code=status.HTTP_200_OK)
 async def get_cards(user_id: UUID,
-                    api_key: str = Depends(get_api_key)):
+                    current_user: User = Depends(get_current_user)):
     logger.info(f"Попытка получения кредитной карты пользователя с UUID: {user_id}")
 
     try:

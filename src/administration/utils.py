@@ -25,10 +25,6 @@ def validate_password(password: str) -> str:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Пароль должен содержать хотя бы одну цифру")
 
-    if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                            detail="Пароль должен содержать хотя бы один специальный символ")
-
     if re.search(r'\b(password|1234|qwerty)\b', password, re.I):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Пароль не должен содержать легко подбираемые последовательности")

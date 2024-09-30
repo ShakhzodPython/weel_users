@@ -10,7 +10,7 @@ from sqlalchemy.orm import selectinload
 from logs.logger import logger
 from src.users.models import User, Card
 from src.users.schemas import UserSchemas, UserUpdate
-from database.security import get_api_key, get_current_user
+from database.security import get_api_key, get_current_user, is_superuser
 from database.settings import get_db
 
 router_users = APIRouter(
@@ -21,7 +21,7 @@ router_users = APIRouter(
 @router_users.get("/api/v1/users/", response_model=List[UserSchemas], status_code=status.HTTP_200_OK)
 async def get_users(
         blacklisted_cards: bool = Query(False, description="Filter users with blacklisted credit cards"),
-        api_key: str = Depends(get_api_key),
+        current_user: User = Depends(is_superuser),
         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка получения всех пользователей")
 
@@ -64,7 +64,7 @@ async def get_user_by_id(user_id: UUID,
 
 @router_users.put("/api/v1/users/{user_id}/", response_model=UserSchemas, status_code=status.HTTP_200_OK)
 async def update_user(user_id: UUID,
-                      user_update: UserUpdate,
+                      objects: UserUpdate,
                       current_user: User = Depends(get_current_user),
                       db: AsyncSession = Depends(get_db)):
     logger.info(f"Попытка изменения данных пользователя с UUID: {user_id}")
@@ -82,20 +82,20 @@ async def update_user(user_id: UUID,
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
     existing_phone_number_stmt = await db.execute(
-        select(User).where(User.phone_number == user_update.phone_number, User.id != user_id))
+        select(User).where(User.phone_number == objects.phone_number, User.id != user_id))
     existing_phone_number = existing_phone_number_stmt.scalars().one_or_none()
     if existing_phone_number:
-        logger.error(f"Пользователь с номером телефона: {user_update.phone_number} уже существует")
+        logger.error(f"Пользователь с номером телефона: {objects.phone_number} уже существует")
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="User with this phone number already exist")
 
     existing_email_stmt = await db.execute(
-        select(User).where(User.email == user_update.email, User.id != user_id))
+        select(User).where(User.email == objects.email, User.id != user_id))
     existing_email = existing_email_stmt.scalars().one_or_none()
     if existing_email:
-        logger.error(f"Пользователь с email: {user_update.email} уже существует")
+        logger.error(f"Пользователь с email: {objects.email} уже существует")
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"User with this email already exist")
 
-    for var, value in user_update.dict(exclude_unset=True).items():
+    for var, value in objects.dict(exclude_unset=True).items():
         setattr(user, var, value)
 
     db.add(user)
