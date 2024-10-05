@@ -3,6 +3,7 @@ from slowapi.errors import RateLimitExceeded
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.staticfiles import StaticFiles
 
 from endpoints.routes import routes
 from logs.filter import contextual_filter
@@ -45,6 +46,9 @@ async def log_ip(request: Request, call_next):
     contextual_filter.ip = ip
     response = await call_next(request)
     return response
+
+
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 # @app.get("/docs", deprecated=[Depends(is_admin)])
 # async def get_docs():

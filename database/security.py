@@ -4,7 +4,7 @@ import jwt
 
 from datetime import datetime, timedelta
 
-from fastapi import Header, Depends, Request
+from fastapi import Depends, Request
 from fastapi import HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
@@ -66,7 +66,7 @@ def hash_data(data, salt="some_salt"):
 def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes=60)):
     try:
         to_encode = data.copy()
-        to_encode['user_id'] = str(to_encode['user_id'])
+        to_encode["user_uuid"] = str(to_encode["user_uuid"])
         expire = datetime.utcnow() + expires_delta
         to_encode.update({"exp": expire, "token_type": "access"})
         encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
@@ -81,7 +81,7 @@ def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes
 def create_refresh_token(data: dict, expires_delta: timedelta = timedelta(days=180)):
     try:
         to_encode = data.copy()
-        to_encode['user_id'] = str(to_encode['user_id'])
+        to_encode["user_uuid"] = str(to_encode["user_uuid"])
         expire = datetime.utcnow() + expires_delta
         to_encode.update({"exp": expire, "token_type": "refresh"})
         encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
@@ -96,13 +96,13 @@ def create_refresh_token(data: dict, expires_delta: timedelta = timedelta(days=1
 def decode_access_token(token: str):
     try:
         payload = jwt.decode(jwt=token, key=SECRET_KEY, algorithms=[ALGORITHM])
-        user_id = payload.get("user_id")
-        if not user_id:
+        user_uuid = payload.get("user_uuid")
+        if not user_uuid:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                                detail="Token does not contain required user_id")
+                                detail="Token does not contain required user_uuid")
 
-        # Преобразуем user_id в UUID сразу здесь, чтобы избежать дублирования кода
-        payload["user_id"] = uuid.UUID(user_id)
+        # Преобразуем user_uuid в UUID сразу здесь, чтобы избежать дублирования кода
+        payload["user_uuid"] = uuid.UUID(user_uuid)
         return payload
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=status.HTTP_410_GONE, detail="Token expired")
@@ -113,13 +113,13 @@ def decode_access_token(token: str):
 async def get_current_user(token: str = Depends(JWTBearer()),
                            db: AsyncSession = Depends(get_db)):
     payload = decode_access_token(token)
-    user_id = payload.get("user_id")
+    user_uuid = payload.get("user_uuid")
 
-    stmt = await db.execute(select(User).options(selectinload(User.roles)).where(User.id == user_id))
+    stmt = await db.execute(select(User).options(selectinload(User.roles)).where(User.uuid == user_uuid))
     user = stmt.scalars().one_or_none()
 
     if not user:
-        logger.error(f"Пользователь с {user_id} не найден")
+        logger.error(f"Пользователь с {user_uuid} не найден")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
     # Проверка, является ли пользователь суперпользователем
@@ -143,12 +143,16 @@ async def is_superuser(token: str = Depends(JWTBearer()),
 async def is_courier(token: str = Depends(JWTBearer()),
                      db: AsyncSession = Depends(get_db)):
     payload = decode_access_token(token)
-    user_id = payload.get("user_id")
-    stmt = await db.execute(select(User).options(selectinload(User.roles)).where(User.id == user_id))
-    user = stmt.scalars().one_or_none()
+    user_uuid = payload.get("user_uuid")
+
+    user = await db.scalar(
+        select(User)
+        .options(selectinload(User.roles))
+        .where(User.uuid == user_uuid)
+    )
 
     if not user:
-        logger.error(f"Курьер с UUID: {user_id} не найден")
+        logger.error(f"Курьер с UUID: {user_uuid} не найден")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Courier not found")
 
     # Проверка, является ли пользователь суперпользователем
@@ -160,12 +164,16 @@ async def is_courier(token: str = Depends(JWTBearer()),
 async def is_restaurant_editor(token: str = Depends(JWTBearer()),
                                db: AsyncSession = Depends(get_db)):
     payload = decode_access_token(token)
-    user_id = payload.get("user_id")
-    stmt = await db.execute(select(User).options(selectinload(User.roles)).where(User.id == user_id))
-    user = stmt.scalars().one_or_none()
+    user_uuid = payload.get("user_uuid")
+
+    user = await db.scalar(
+        select(User)
+        .options(selectinload(User.roles))
+        .where(User.uuid == user_uuid)
+    )
 
     if not user:
-        logger.error(f"Редактор ресторана с UUID: {user_id} не найден")
+        logger.error(f"Редактор ресторана с UUID: {user_uuid} не найден")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Restaurant editor not found")
 
     # Проверка, является ли пользователь суперпользователем

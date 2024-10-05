@@ -12,12 +12,22 @@ class SuperuserUpdate(BaseModel):
 
 
 class SuperuserSchemas(BaseModel):
-    id: UUID
+    uuid: UUID
     username: str
     full_name: Optional[str] = None
-    phone_number: Optional[str] = None
     email: Optional[EmailStr] = None
+    phone_number: Optional[str] = None
     registered_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class RolesSchemas(BaseModel):
+    id: int
+    name: str
+    description: str
+    created_at: datetime
 
     class Config:
         from_attributes = True

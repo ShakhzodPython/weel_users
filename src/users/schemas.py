@@ -15,16 +15,16 @@ class CardSchemas(BaseModel):
 
 
 class UserUpdate(BaseModel):
-    phone_number: Optional[str] = None
-    full_name: Optional[str] = None
     email: Optional[EmailStr] = None
+    full_name: Optional[str] = None
+    phone_number: Optional[str] = None
 
 
 class UserSchemas(BaseModel):
-    id: UUID
-    phone_number: str
+    uuid: UUID
     full_name: Optional[str] = None
     email: Optional[EmailStr] = None
+    phone_number: str
     cards: List[CardSchemas]
     registered_at: datetime
 

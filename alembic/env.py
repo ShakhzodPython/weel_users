@@ -9,6 +9,7 @@ from database.config import DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 from database.settings import Base
 # Импорт всех модулей для миграции в бд
 from src.users.models import User, Card
+from src.media.models import Media
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -11,7 +11,7 @@ from sqlalchemy.orm import selectinload
 
 from logs.logger import logger
 from database.settings import get_db
-from database.security import get_current_user, hash_data, get_api_key, is_superuser
+from database.security import get_current_user, hash_data, is_superuser
 from database.config import STPimsApiPartnerKey, PASSWORD, LOGIN, SERVICE_ID
 from src.payments.requests import card_response, confirm_card, get_all_cards, create_payment
 from src.payments.response_parser import parse_confirm_id, parse_uzcard_id, parse_card_phone, \
@@ -26,14 +26,14 @@ router_payment = APIRouter(
 )
 
 
-@router_payment.get("/api/v1/cards/{user_id}/", status_code=status.HTTP_200_OK)
-async def get_cards(user_id: UUID,
+@router_payment.get("/api/v1/cards/{user_uuid}/", status_code=status.HTTP_200_OK)
+async def get_cards(user_uuid: UUID,
                     current_user: User = Depends(get_current_user)):
-    logger.info(f"Попытка получения кредитной карты пользователя с UUID: {user_id}")
+    logger.info("Попытка получения кредитной карты пользователя с UUID: %s", user_uuid)
 
     try:
         # Получение uzcard_id из Redis
-        uzcard_id = await get_uzcard_id(user_id)
+        uzcard_id = await get_uzcard_id(user_uuid)
         if not uzcard_id:
             logger.error("Uzcard ID не найден или просрочен")
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Uzcard ID not found or expired")
@@ -54,7 +54,7 @@ async def get_cards(user_id: UUID,
 
         card_lst = data_to_dict.get("S:Envelope", {}).get("S:Body", {}).get("ns2:partnerCardListResponse", {}).get(
             "return", {})
-        logger.success(f"Кредитная карта пользователя с UUID: {user_id} получена успешно")
+        logger.success("Кредитная карта пользователя с UUID: %s получена успешно", user_uuid)
         return {"cards": card_lst}
     except HTTPException as e:
         logger.error(str(e))
@@ -65,17 +65,16 @@ async def get_cards(user_id: UUID,
 async def card_registration(
         card_number: str = Form(...),
         expiry_date: str = Form(..., description="Enter expiry date in format MM/YY"),
-        current_user: UUID = Depends(get_current_user),
+        current_user: User = Depends(get_current_user),
         db: AsyncSession = Depends(get_db)):
     # Проверка наличия карты в базе данных
-    logger.info(f"Попытка регистрации кредитной карты пользователь с UUID: {current_user.id}")
+    logger.info("Попытка регистрации кредитной карты пользователь с UUID: %s", current_user.uuid)
 
     # Проверка наличия карты в базе данных
     card_number_hashed = hash_data(card_number)
-    existing_card_stmt = await db.execute(select(Card).where(Card.card_number_hashed == card_number_hashed))
-    existing_card = existing_card_stmt.scalars().one_or_none()
+    existing_card = await db.scalar(select(Card).where(Card.card_number_hashed == card_number_hashed))
     if existing_card:
-        logger.error(f"Кредитная карта пользователя с UUID: {current_user.id} уже существует")
+        logger.error("Кредитная карта пользователя с UUID: %s уже существует", current_user.uuid)
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Card already exist")
 
     # Переформатирование формата срока действия карты
@@ -102,7 +101,7 @@ async def card_registration(
     confirm_id = parse_confirm_id(response.text)
     await save_confirm_id(current_user.id, confirm_id)
     await save_card(current_user.id, card_number, formatted_expiry_date)
-    logger.success(f"СМС-код успешно отправлен пользователю с UUID: {current_user.id}")
+    logger.success("СМС-код успешно отправлен пользователю с UUID: %s", current_user.uuid)
     return {"detail": "Sms code send successfully"}
 
 
@@ -133,7 +132,7 @@ async def card_registration(
 async def card_confirmation(verify_code: int,
                             current_user: User = Depends(get_current_user),
                             db: AsyncSession = Depends(get_db)):
-    logger.info(f"Попытка подтверждения кредитной карты пользователем с UUID: {current_user.id}")
+    logger.info("Попытка подтверждения кредитной карты пользователем с UUID: %s", current_user.uuid)
     # Получение confirm_id из Redis
     confirm_id = await get_confirm_id(current_user.id)
 
@@ -179,7 +178,7 @@ async def card_confirmation(verify_code: int,
         db.add(new_card)
         await db.commit()
         await db.refresh(new_card)
-        logger.success(f"Кредитная карта пользователя: {current_user.id} добавлена успешно")
+        logger.success("Кредитная карта пользователя: %s  добавлена успешно", current_user.uuid)
         return {"detail": "Card added successfully"}
     except Exception as e:
         logger.error(f"Failed to save new card: {e}")
@@ -207,22 +206,22 @@ async def card_confirmation(verify_code: int,
 #         "detail": "Payment canceled",
 #     }
 
-@router_payment.post("/api/v1/cards/pay/{user_id}/", status_code=status.HTTP_200_OK)
-async def card_payment(user_id: UUID,
+@router_payment.post("/api/v1/cards/pay/{user_uuid}/", status_code=status.HTTP_200_OK)
+async def card_payment(user_uuid: UUID,
                        amount_tiyin: int):
-    logger.info(f"Попытка снятия средств с карты пользователя с UUID: {user_id}")
+    logger.info("Попытка снятия средств с карты пользователя с UUID: %s", user_uuid)
 
-    uzcard_id = await get_uzcard_id(user_id)
+    uzcard_id = await get_uzcard_id(user_uuid)
     if not uzcard_id:
         logger.error("Uzcard ID не найден")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Uzcard ID not found")
 
-    card_phone = await get_card_phone(user_id)
+    card_phone = await get_card_phone(user_uuid)
     if not card_phone:
         logger.error("Номер телефона карты не найден")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Card phone number not found")
 
-    response = await create_payment(STPimsApiPartnerKey, uzcard_id, card_phone, SERVICE_ID, user_id,
+    response = await create_payment(STPimsApiPartnerKey, uzcard_id, card_phone, SERVICE_ID, user_uuid,
                                     amount_tiyin, LOGIN, PASSWORD)
 
     # Парсинг ошибки
@@ -231,12 +230,12 @@ async def card_payment(user_id: UUID,
     correct = root.find(".//s:Body/ns2:partnerPaymentResponse/return/Result/code", namespaces=namespaces)
     error = root.find(".//s:Body/ns2:partnerPaymentResponse/return/Result/Description", namespaces=namespaces)
     if correct is not None and correct.text != "OK":
-        logger.error(f"Ошибка при оплате по кредитной карте {error.text}")
+        logger.error("Ошибка при оплате по кредитной карте %s", error.text)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error.text)
 
     # Извлечение uzcard_id из ответа
     transaction = parse_transaction_id(response.text)
-    await save_transaction_id(user_id, transaction)
+    await save_transaction_id(user_uuid, transaction)
 
     confirmed = parse_confirmation(response.text)
     if confirmed == "false":
@@ -244,32 +243,31 @@ async def card_payment(user_id: UUID,
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Your card not connected to your phone_number")
 
-    logger.success(f"Со пользователь с UUID: {user_id} успешно сняты средства")
+    logger.success("С пользователя с UUID: %s успешно сняты средства", user_uuid)
     return {"detail": "Payment was successfully"}
 
 
 @router_payment.delete("/api/v1/cards/delete/{card_id}/", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_card(card_id: int,
-                      user_id: UUID,
+                      user_uuid: UUID,
                       current_user: User = Depends(get_current_user),
                       db: AsyncSession = Depends(get_db)):
-    logger.info(f"Попытка удаления кредитной карты с ID: {card_id}")
+    logger.info("Попытка удаления кредитной карты с ID: %s", card_id)
 
-    if "SUPERUSER" not in [role.name for role in current_user.roles] and user_id != current_user.id:
+    if "SUPERUSER" not in [role.name for role in current_user.roles] and user_uuid != current_user.uuid:
         logger.error("Доступ запрещен: У вас недостаточно прав")
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="Access denied: You don't have enough privileges")
 
-    stmt = await db.execute(select(Card).options(selectinload(Card.user)).where(Card.id == card_id))
-    card = stmt.scalars().one_or_none()
+    card = await db.scalar(select(Card).options(selectinload(Card.user)).where(Card.id == card_id))
 
     if card is None:
-        logger.error(f"Карта с ID:{card_id} не найдена")
+        logger.error("Карта с ID: %s не найдена", card_id)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Card not found")
 
     await db.delete(card)
     await db.commit()
-    logger.success(f"Карта с ID: {card} успешно удалена")
+    logger.success("Карта с ID: %s успешно удалена", card_id)
     return Response(status.HTTP_204_NO_CONTENT)
 
 
@@ -279,8 +277,7 @@ async def add_blacklist_card(card_id: int,
                              current_user: User = Depends(is_superuser)):
     logger.info(f"Попытка добавить кредитную карту с ID: {card_id} в черный список")
 
-    stmt = await db.execute(select(Card).where(Card.id == card_id))
-    card = stmt.scalars().one_or_none()
+    card = await db.scalar(select(Card).where(Card.id == card_id))
     if card is None:
         logger.error(f"Кредитная карта с ID: {card_id} не найдена")
         raise HTTPException(status_code=404, detail="Card not found")
@@ -305,8 +302,7 @@ async def remove_blacklist_card(card_id: int,
                                 current_user: User = Depends(is_superuser)):
     logger.info(f"Попытка добавить кредитную карту с ID: {card_id} в черный список")
 
-    stmt = await db.execute(select(Card).where(Card.id == card_id))
-    card = stmt.scalars().one_or_none()
+    card = await db.scalar(select(Card).where(Card.id == card_id))
     if card is None:
         logger.error(f"Кредитная карта с ID: {card_id} не найдена")
         raise HTTPException(status_code=404, detail="Card not found")

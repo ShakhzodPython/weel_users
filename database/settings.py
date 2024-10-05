@@ -11,6 +11,9 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 from database.config import DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME, REDIS_HOST, REDIS_PORT, REDIS_DB
 
+ALLOWED_IMAGE_TYPES = {"image/jpg", "image/jpeg", "image/png", "image/webp"}
+UPLOAD_DIR = "uploads/"  # директория хранения фотографии
+
 DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 Base = declarative_base()

@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 from database.settings import Base
+from src.media.models import Media
 
 
 class Role(Base):
@@ -19,16 +20,18 @@ class Role(Base):
 
 class User(Base):
     __tablename__ = "user"
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
+    uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
     username = Column(String(100), unique=True, nullable=True)
     hash_password = Column(String(128), nullable=True)
     phone_number = Column(String(11), unique=True)
     full_name = Column(String(100), nullable=True)
     email = Column(String(100), nullable=True, unique=True)
+    image = Column(Integer, ForeignKey("media.id"), nullable=True)
     registered_at = Column(DateTime, server_default=func.now())
 
     roles = relationship("Role", secondary="user_roles")
-    cards = relationship("Card", back_populates="user", cascade="all, delete-orphan")
+    cards = relationship("Card", back_populates="user", cascade="all, delete")
+    media = relationship(Media, back_populates="user")
 
     def set_password(self, password: str):
         self.hash_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode('utf-8')
@@ -43,7 +46,7 @@ class User(Base):
 class Card(Base):
     __tablename__ = "cards"
     id = Column(Integer, primary_key=True)
-    user_id = Column(UUID(as_uuid=True), ForeignKey('user.id'))
+    user_id = Column(UUID(as_uuid=True), ForeignKey('user.uuid'))
     user = relationship("User", back_populates="cards")
     card_number_hashed = Column(String(225), unique=True)
     expiry_date_hashed = Column(String(225))
@@ -57,6 +60,6 @@ class Card(Base):
 user_roles = Table(
     "user_roles",
     Base.metadata,
-    Column('user_id', UUID(as_uuid=True), ForeignKey('user.id'), primary_key=True),
+    Column('user_id', UUID(as_uuid=True), ForeignKey('user.uuid'), primary_key=True),
     Column('role_id', Integer, ForeignKey('roles.id'), primary_key=True)
 )

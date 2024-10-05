@@ -7,17 +7,17 @@ from pydantic import BaseModel, EmailStr
 
 
 class RestaurantEditorUpdate(BaseModel):
-    username: Optional[str] = None
     full_name: Optional[str] = None
     email: Optional[EmailStr] = None
+    phone_number: Optional[str] = None
 
 
 class RestaurantEditorSchemas(BaseModel):
-    id: UUID
+    uuid: UUID
     username: str
-    phone_number: Optional[str] = None
     full_name: Optional[str] = None
     email: Optional[EmailStr] = None
+    phone_number: Optional[str] = None
     registered_at: datetime
 
     class Config:

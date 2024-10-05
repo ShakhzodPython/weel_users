@@ -26,16 +26,17 @@ router_auth = APIRouter(
 async def sign_up(request: Request,
                   phone_number: str,
                   db: AsyncSession = Depends(get_db)):
-    logger.info(f"Попытка регистрации с телефон номером: {phone_number}")
+    logger.info("Попытка регистрации с телефон номером: %s", phone_number)
     try:
         valid_phone_number = await check_phone(phone_number)
 
-        stmt = await db.execute(select(User).options(selectinload(User.roles)).where(
-            User.roles.any(name="USER"), User.phone_number == phone_number))
-        existing_phone_number = stmt.scalars().one_or_none()
+        existing_phone_number = await db.scalar(
+            select(User)
+            .where(User.phone_number == phone_number)
+        )
 
         if existing_phone_number:
-            logger.error(f"Пользователь с телефон номер: {phone_number} уже существует")
+            logger.error("Пользователь с телефон номер: %s уже существует", phone_number)
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                                 detail="User with this phone number already exist")
 
@@ -48,11 +49,11 @@ async def sign_up(request: Request,
                                       f"Код верификации для входа в приложение WEEL: {verification_code}",
                                       token)
             if response.get("error"):
-                logger.error(f"Ошибка при отправке SMS на телефон номер: {phone_number}")
+                logger.error("Ошибка при отправке SMS на телефон номер: %s", phone_number)
                 raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                                     detail=f"Ошибка при отправке SMS на номер: {phone_number}")
 
-            logger.success(f"СМС код успешно отправлен на телефон номер: {phone_number}")
+            logger.success("СМС код успешно отправлен на телефон номер: %s", phone_number)
             return {"detail": f"СМС код успешно отправлен на телефон номер: {phone_number}"}
         else:
             logger.error("Не верный формат телефон номера")
@@ -65,16 +66,15 @@ async def sign_up(request: Request,
 @router_auth.post("/api/v1/auth/sign_up/verify/", status_code=status.HTTP_201_CREATED)
 async def verify_code(code: str,
                       db: AsyncSession = Depends(get_db)):
-    # Извлечение номера телефона из Redis по коду
     phone_number = await get_phone_number(code)
-    logger.info(f"Проверка кода верификации для телефон номера: {phone_number}")
+    logger.info("Проверка кода верификации для телефон номера: %s", phone_number)
 
     redis_code = await get_verification_code(phone_number)
     if redis_code is None or redis_code != code:
         attempts = await increment_attempt(phone_number)
         remaining_attempts = 4 - attempts
         if remaining_attempts > 0:
-            logger.error(f"Неверный код, попыток осталось: {remaining_attempts}")
+            logger.error("Неверный код, попыток осталось: %s", remaining_attempts)
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                                 detail=f"Неверный код, у вас осталось {remaining_attempts} {'попытка' if remaining_attempts == 1 else 'попытки'}")
         else:
@@ -86,8 +86,7 @@ async def verify_code(code: str,
         # Сброс попыток после успешной верификации
         await reset_attempts(phone_number)
 
-    role_stmt = await db.execute(select(Role).where(Role.name == "USER"))
-    role = role_stmt.scalars().one_or_none()
+    role = await db.scalar(select(Role).where(Role.name == "USER"))
 
     if role is None:
         logger.error("Роль: USER не найдена")
@@ -100,10 +99,10 @@ async def verify_code(code: str,
     await db.refresh(user)
 
     # генерация JWT токена
-    logger.success(f"Пользователь {phone_number} успешно зарегистрирован c ролью {role.name}.")
-    access_token = create_access_token(data={"user_id": user.id, "role": role.name})
+    logger.success("Пользователь c телефон номером: %s успешно зарегистрирован c ролью %s", phone_number, role.name)
+    access_token = create_access_token(data={"user_uuid": user.uuid, "role": role.name})
     refresh_token = create_refresh_token(
-        data={"user_id": user.id, "role": role.name})
+        data={"user_uuid": user.uuid, "role": role.name})
 
     return {
         "access_token": access_token,
@@ -118,7 +117,7 @@ async def refresh_token(refresh_token: str,
     logger.info("Попытка создания refresh token")
     try:
         payload = jwt.decode(refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id = payload.get("user_id")
+        user_uuid = payload.get("user_uuid")
         user_role = payload.get("role")
         if user_role != "USER":
             logger.error("Не корректная роль")
@@ -129,11 +128,11 @@ async def refresh_token(refresh_token: str,
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Token invalid")
 
-    stmt = await db.execute(select(Role).where(Role.name == "USER"))
-    role = stmt.scalars().one_or_none()
+    role = await db.scalar(select(Role).where(Role.name == "USER"))
 
-    new_access_token = create_access_token(data={"user_id": user_id, "role": role.name})
-    logger.success(f"Токен успешно обновлён для пользователя {user_id}")
+    new_access_token = create_access_token(data={"user_uuid": user_uuid, "role": role.name})
+
+    logger.success("Токен успешно обновлён для пользователя с UUID: %s", user_uuid)
     return {
         "access_token": new_access_token
     }
