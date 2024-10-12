@@ -1,3 +1,4 @@
+import os
 import jwt
 
 from typing import List
@@ -9,11 +10,11 @@ from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from database.config import SECRET_KEY, ALGORITHM
-from database.security import create_access_token, create_refresh_token, is_superuser
-from database.settings import get_db
+from config.settings import SECRET_KEY, ALGORITHM, UPLOAD_DIR
+from config.security import create_access_token, create_refresh_token, is_superuser
+from config.database import get_db
 from logs.logger import logger
-from src.administration.utils import validate_password, validate_username
+from src.superusers.utils import validate_password, validate_username
 from src.authorization.utils import check_phone
 from src.couriers.schemas import CourierSchemas, CourierUpdate
 from src.media.models import Media
@@ -115,6 +116,7 @@ async def sign_in(username: str = Form(...),
 
     logger.success("Курьер с именем пользователя: %s успешно вошел в аккаунт", username)
     return {
+        "uuid": str(courier.uuid),
         "access_token": access_token,
         "refresh_token": refresh_token,
         "detail": f"Courier with username: {username} logged into the account successfully"
@@ -153,13 +155,13 @@ async def refresh_token(refresh_token: str,
                      status_code=status.HTTP_200_OK)
 async def get_couriers(
         # username: str = Query(None),
-        current_user: User = Depends(is_superuser),
+        # current_user: User = Depends(is_superuser),
         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка получения всех курьеров")
 
     stmt = await db.scalars(
         select(User)
-        .options(selectinload(User.roles))
+        .options(selectinload(User.media), selectinload(User.roles))
         .where(User.roles.any(name="COURIER"))
         .order_by(asc(User.uuid))
     )
@@ -183,7 +185,8 @@ async def get_courier_by_uuid(user_uuid: UUID,
 
     courier = await db.scalar(
         select(User)
-        .options(selectinload(User.roles))
+        .options(selectinload(User.roles),
+                 selectinload(User.media))
         .where(User.roles.any(name="COURIER"), User.uuid == user_uuid))
 
     if courier is None:
@@ -256,7 +259,7 @@ async def delete_courier(user_uuid: UUID,
 
     courier = await db.scalar(
         select(User)
-        .options(selectinload(User.roles))
+        .options(selectinload(User.roles), selectinload(User.media))
         .where(User.roles.any(name="COURIER"), User.uuid == user_uuid)
     )
 
@@ -264,7 +267,26 @@ async def delete_courier(user_uuid: UUID,
         logger.error("Курьер c UUID: не найден", user_uuid)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
-    await db.delete(courier)
-    await db.commit()
-    logger.success("Курьер c UUID: успешно удален", user_uuid)
+    try:
+        if courier.media:
+            media = courier.media
+            url = os.path.join(UPLOAD_DIR, os.path.basename(media.url))
+            if os.path.exists(url):
+                try:
+                    os.remove(url)
+                except Exception as e:
+                    logger.error("Ошибка при удалении файла медиа: %s", str(e))
+                    raise HTTPException(
+                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        detail="Failed to delete media file")
+            await db.delete(media)
+
+        await db.delete(courier)
+        await db.commit()
+        logger.success("Курьер c UUID: успешно удален", user_uuid)
+    except Exception as e:
+        logger.error("Ошибка: %s при удалении курьера с UUID: %s", user_uuid, str(e))
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error")
     return Response(status_code=status.HTTP_204_NO_CONTENT)

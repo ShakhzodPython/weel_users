@@ -6,7 +6,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
-from database.settings import Base
+from config.database import Base
 from src.media.models import Media
 
 
@@ -27,6 +27,7 @@ class User(Base):
     full_name = Column(String(100), nullable=True)
     email = Column(String(100), nullable=True, unique=True)
     image = Column(Integer, ForeignKey("media.id"), nullable=True)
+    updated_at = Column(DateTime, onupdate=func.now(), nullable=True)
     registered_at = Column(DateTime, server_default=func.now())
 
     roles = relationship("Role", secondary="user_roles")
@@ -51,10 +52,38 @@ class Card(Base):
     card_number_hashed = Column(String(225), unique=True)
     expiry_date_hashed = Column(String(225))
     is_blacklisted = Column(Boolean, default=False)
+    updated_at = Column(DateTime, onupdate=func.now(), nullable=True)
     created_at = Column(DateTime, server_default=func.now())
 
     def __repr__(self):
         return f"User: {self.user.full_name} | {self.user.phone_number}"
+
+
+class Wallet(Base):
+    __tablename__ = "wallet"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(UUID(as_uuid=True), ForeignKey('user.uuid'))
+    card_id = Column(Integer, ForeignKey("cards.id"))
+    profit = Column(Integer)
+    updated_at = Column(DateTime, onupdate=func.now(), nullable=True)
+    created_at = Column(DateTime, server_default=func.now())
+
+    def __repr__(self):
+        return f"User: {self.user.username} | {self.profit}"
+
+
+class WorkSchedule(Base):
+    __tablename__ = "work_schedule"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(UUID(as_uuid=True), ForeignKey('user.uuid'))
+    day_of_week = Column(String, nullable=False)
+    start_time = Column(Integer, nullable=False)
+    end_time = Column(Integer, nullable=False)
+    updated_at = Column(DateTime, onupdate=func.now(), nullable=True)
+    created_at = Column(DateTime, server_default=func.now())
+
+    def __repr__(self):
+        return f"User: {self.user.username} | {self.day_of_week}"
 
 
 user_roles = Table(

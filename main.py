@@ -9,7 +9,8 @@ from endpoints.routes import routes
 from logs.filter import contextual_filter
 from logs.utils import get_client_ip
 from src.authorization.rate_limeter import limiter
-from database.settings import TimeMiddleware
+from config.database import close_redis_connection, get_redis_connection
+from config.settings import TimeMiddleware
 
 app = FastAPI(
     title="Weel Users Microservice",
@@ -40,6 +41,11 @@ app.add_middleware(
 )
 
 
+@app.on_event("startup")
+async def startup_event():
+    await get_redis_connection()
+
+
 @app.middleware("http")
 async def log_ip(request: Request, call_next):
     ip = get_client_ip(request)
@@ -48,7 +54,12 @@ async def log_ip(request: Request, call_next):
     return response
 
 
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+@app.on_event("shutdown")
+async def shutdown_event():
+    await close_redis_connection()
+
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # @app.get("/docs", deprecated=[Depends(is_admin)])
 # async def get_docs():

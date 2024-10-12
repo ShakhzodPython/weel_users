@@ -3,7 +3,6 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
-from fastapi import Form, File, UploadFile
 from pydantic import BaseModel, EmailStr
 
 from src.media.schemas import MediaSchemas
@@ -21,7 +20,7 @@ class CourierSchemas(BaseModel):
     full_name: Optional[str] = None
     email: Optional[EmailStr] = None
     phone_number: Optional[str] = None
-    media: MediaSchemas
+    media: Optional[MediaSchemas] = None
     registered_at: datetime
 
     class Config:

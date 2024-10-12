@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, func, DateTime
 from sqlalchemy.orm import relationship
 
-from database.settings import Base
+from config.database import Base
 
 
 class Media(Base):

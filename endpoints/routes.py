@@ -1,11 +1,12 @@
 from fastapi import APIRouter
 
-from src.administration.routes import router_admin
+from languages.routes import router_translation
+from src.superusers.routes import router_admin
 from src.authorization.routes import router_auth
 from src.users.routes import router_users
 from src.payments.routes import router_payment
 from src.couriers.routes import router_couriers
-from src.restaurant_editors.routes import router_restaurant_editors
+from src.restaurants_editors.routes import router_restaurants_editors
 
 routes = APIRouter()
 
@@ -25,4 +26,7 @@ routes.include_router(router_couriers)
 routes.include_router(router_payment)
 
 #
-routes.include_router(router_restaurant_editors)
+routes.include_router(router_restaurants_editors)
+
+#
+routes.include_router(router_translation)

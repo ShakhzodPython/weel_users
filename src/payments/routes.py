@@ -10,9 +10,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from logs.logger import logger
-from database.settings import get_db
-from database.security import get_current_user, hash_data, is_superuser
-from database.config import STPimsApiPartnerKey, PASSWORD, LOGIN, SERVICE_ID
+from config.database import get_db
+from config.security import get_current_user, hash_data, is_superuser
 from src.payments.requests import card_response, confirm_card, get_all_cards, create_payment
 from src.payments.response_parser import parse_confirm_id, parse_uzcard_id, parse_card_phone, \
     parse_balance_from_confirm, parse_transaction_id, parse_confirmation
@@ -129,7 +128,7 @@ async def card_registration(
 #     }
 
 @router_payment.post("/api/v1/cards/confirm/", status_code=status.HTTP_201_CREATED)
-async def card_confirmation(verify_code: int,
+async def card_confirmation(verify_code: int = Form(...),
                             current_user: User = Depends(get_current_user),
                             db: AsyncSession = Depends(get_db)):
     logger.info("Попытка подтверждения кредитной карты пользователем с UUID: %s", current_user.uuid)
@@ -208,7 +207,7 @@ async def card_confirmation(verify_code: int,
 
 @router_payment.post("/api/v1/cards/pay/{user_uuid}/", status_code=status.HTTP_200_OK)
 async def card_payment(user_uuid: UUID,
-                       amount_tiyin: int):
+                       amount: int):
     logger.info("Попытка снятия средств с карты пользователя с UUID: %s", user_uuid)
 
     uzcard_id = await get_uzcard_id(user_uuid)
@@ -222,7 +221,7 @@ async def card_payment(user_uuid: UUID,
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Card phone number not found")
 
     response = await create_payment(STPimsApiPartnerKey, uzcard_id, card_phone, SERVICE_ID, user_uuid,
-                                    amount_tiyin, LOGIN, PASSWORD)
+                                    amount, LOGIN, PASSWORD)
 
     # Парсинг ошибки
     root = ElementTree.fromstring(response.text)

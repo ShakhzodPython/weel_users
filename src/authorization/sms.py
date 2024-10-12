@@ -1,5 +1,3 @@
-import requests
-
 from fastapi import Request, HTTPException, status
 
 from random import randint
@@ -12,7 +10,7 @@ from src.authorization.redis import get_redis_connection
 
 def generate_verification_code():
     code = randint(1000, 9999)
-    logger.success(f"Код для подтверждения сгенерирован успешно: {code}")
+    logger.success(f"Код для подтверждения сгенерирован успешно")
     return code
 
 
@@ -29,16 +27,17 @@ async def get_eskiz_token(email: str, password: str):
         "password": password
     }
     try:
-        response = requests.post(url, data=payload)
-        response_data = response.json()
-        if response.status_code == 200 and "data" in response_data:
-            token = response_data["data"]["token"]
-            await redis.set("eskiz_token", token, expire=3600)
-            logger.info("Новый токен Eskiz извлекается и хранится в Redis")
-        else:
-            logger.error("Не удалось пройти аутентификацию в API Eskiz")
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                                detail="Не удалось пройти аутентификацию в API Eskiz")
+        async with ClientSession() as session:
+            async with session.post(url, data=payload) as response:
+                response_data = await response.json()
+                if response.status == 200 and "data" in response_data:
+                    token = response_data["data"]["token"]
+                    await redis.set("eskiz_token", token, expire=3600)
+                    logger.info("Новый токен Eskiz получен и сохранён в Redis")
+                else:
+                    logger.error("Не удалось пройти аутентификацию в API Eskiz")
+                    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                                        detail="Не удалось пройти аутентификацию в API Eskiz")
     finally:
         redis.close()
         await redis.wait_closed()

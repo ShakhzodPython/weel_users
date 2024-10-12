@@ -4,7 +4,7 @@ from uuid import uuid4
 import aiofiles
 from fastapi import UploadFile, HTTPException, status
 
-from database.settings import ALLOWED_IMAGE_TYPES, UPLOAD_DIR
+from config.settings import ALLOWED_IMAGE_TYPES, UPLOAD_DIR
 from logs.logger import logger
 
 
@@ -30,4 +30,4 @@ async def save_image(image: UploadFile) -> str:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Could not save the file"
         )
-    return f"uploads/{unique_uuid}_{image.filename}"
+    return f"static/uploads/{unique_uuid}_{image.filename}"

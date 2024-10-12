@@ -1,11 +1,10 @@
 from uuid import UUID
 
-from database.settings import get_redis_connection
+from config.database import get_redis_connection, close_redis_connection
 from logs.logger import logger
 
 
 async def save_confirm_id(user_uuid: UUID, confirm_id: int):
-    redis = None
     try:
         redis = await get_redis_connection()
         await redis.set(f"confirm_id:{user_uuid}", confirm_id)
@@ -14,14 +13,10 @@ async def save_confirm_id(user_uuid: UUID, confirm_id: int):
         print(f"Error when saving confirm_id in Redis: {e}")
 
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def get_confirm_id(user_uuid: UUID):
-    redis = None
     try:
         redis = await get_redis_connection()
         # Получаем confirm_id по ключу, который включает user_uuid
@@ -31,14 +26,10 @@ async def get_confirm_id(user_uuid: UUID):
         logger.error(f"Ошибка при получении confirmed_id из Redis: {e}")
         print(f"Error when retrieving confirm_id from Redis: {e}")
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def save_card(user_uuid: UUID, card_number: str, expiry_date: str):
-    redis = None
     try:
         redis = await get_redis_connection()
         await redis.set(f"card_number:{user_uuid}", card_number, expire=60)
@@ -47,14 +38,10 @@ async def save_card(user_uuid: UUID, card_number: str, expiry_date: str):
         logger.error(f"Ошибка при сохранении данных карты в Redis: {e}")
         print(f"Error when saving card data in Redis: {e}")
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def get_card(user_uuid: UUID):
-    redis = None
     try:
         redis = await get_redis_connection()
         card_number = await redis.get(f"card_number:{user_uuid}")
@@ -65,14 +52,10 @@ async def get_card(user_uuid: UUID):
         print(f"Error when retrieving card data in Redis: {e}")
         return None, None
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def save_uzcard_id(user_uuid: UUID, uzcard_id: int):
-    redis = None
     try:
         redis = await get_redis_connection()
         uzcard_id = await redis.set(f"uzcard_id:{user_uuid}", uzcard_id)
@@ -81,10 +64,7 @@ async def save_uzcard_id(user_uuid: UUID, uzcard_id: int):
         logger.error(f"Ошибка при сохранении данных карты в Redis: {e}")
         print(f"Error when saving card data in Redis: {e}")
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def get_uzcard_id(user_uuid: UUID):
@@ -98,14 +78,10 @@ async def get_uzcard_id(user_uuid: UUID):
         logger.error(f"Ошибка при получении confirmed_id из Redis: {e}")
         print(f"Error when retrieving confirm_id from Redis: {e}")
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def save_card_phone(user_uuid: UUID, card_phone: str):
-    redis = None
     try:
         redis = await get_redis_connection()
         card_phone = await redis.set(f"card_phone:{user_uuid}", card_phone)
@@ -114,14 +90,10 @@ async def save_card_phone(user_uuid: UUID, card_phone: str):
         logger.error(f"Ошибка при сохранении данных карты в Redis: {e}")
         print(f"Error when saving card data in Redis: {e}")
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def get_card_phone(user_uuid: UUID):
-    redis = None
     try:
         redis = await get_redis_connection()
         # Получаем card_phone по ключу, который включает user_uuid
@@ -131,14 +103,10 @@ async def get_card_phone(user_uuid: UUID):
         logger.error(f"Ошибка при получении confirmed_id из Redis: {e}")
         print(f"Error when retrieving confirm_id from Redis: {e}")
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def save_transaction_id(user_uuid: UUID, transaction_id: int):
-    redis = None
     try:
         redis = await get_redis_connection()
         transaction = await redis.set(f"transaction:{user_uuid}", transaction_id)
@@ -147,14 +115,10 @@ async def save_transaction_id(user_uuid: UUID, transaction_id: int):
         logger.error(f"Ошибка при сохранении данных карты в Redis: {e}")
         print(f"Error when saving card data in Redis: {e}")
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def get_transaction_id(user_uuid: UUID):
-    redis = None
     try:
         redis = await get_redis_connection()
         # Получаем transition_id по ключу, который включает user_uuid
@@ -164,14 +128,10 @@ async def get_transaction_id(user_uuid: UUID):
         logger.error(f"Ошибка при извлечении транзакции из Redis: {e}")
         print(f"Error when retrieving transaction from Redis: {e}")
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def save_balance(user_uuid: UUID, balance_id: int):
-    redis = None
     try:
         redis = await get_redis_connection()
         balance = await redis.set(f"balance:{user_uuid}", balance_id)
@@ -180,14 +140,10 @@ async def save_balance(user_uuid: UUID, balance_id: int):
         logger.error(f"Ошибка при сохранении баланса в Redis: {e}")
         print(f"Error when saving balance in Redis: {e}")
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()
 
 
 async def get_balance(user_uuid: UUID):
-    redis = None
     try:
         redis = await get_redis_connection()
         balance = await redis.get(f"balance:{user_uuid}")
@@ -196,7 +152,4 @@ async def get_balance(user_uuid: UUID):
         logger.error(f"Ошибка при получении баланса из Redis: {e}")
         print(f"Error when retrieving balance from Redis: {e}")
     finally:
-        if redis:
-            redis.close()
-            logger.info('Redis успешно закрыт')
-            await redis.wait_closed()
+        await close_redis_connection()

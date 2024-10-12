@@ -5,10 +5,10 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from database.config import DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
-from database.settings import Base
+from config.settings import DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
+from config.database import Base
 # Импорт всех модулей для миграции в бд
-from src.users.models import User, Card
+from src.users.models import User, Card, Wallet, WorkSchedule
 from src.media.models import Media
 
 # this is the Alembic Config object, which provides

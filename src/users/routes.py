@@ -11,8 +11,8 @@ from sqlalchemy.orm import selectinload
 from logs.logger import logger
 from src.users.models import User, Card
 from src.users.schemas import UserSchemas, UserUpdate
-from database.security import get_current_user, is_superuser
-from database.settings import get_db
+from config.security import get_current_user
+from config.database import get_db
 
 router_users = APIRouter(
     tags=["Users"],
@@ -24,7 +24,7 @@ router_users = APIRouter(
                   status_code=status.HTTP_200_OK)
 async def get_users(
         blacklisted_cards: bool = Query(False, description="Filter users with blacklisted credit cards"),
-        current_user: User = Depends(is_superuser),
+        # current_user: User = Depends(is_superuser),
         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка получения всех пользователей")
 
