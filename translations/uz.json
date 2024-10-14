@@ -1,4 +1,5 @@
 {
   "example": "Siz Uzbek tilni tanladingiz",
-  "restaurant_editor_sign_in": "Nomli restoran muharriri: {username} hisob qaydnomasiga muvaffaqiyatli kirdi"
+  "re_sign_in": "Nomli restoran muharriri: {username} hisob qaydnomasiga muvaffaqiyatli kirdi",
+  "re_error": "Foydalanuvchi nomi yoki parol noto'gri"
 }

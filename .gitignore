@@ -13,7 +13,6 @@ pyvenv.cfg
 pip-selfcheck.json
 
 ### dotenv template
-.env
 
 ### Python template
 # Byte-compiled / optimized / DLL files

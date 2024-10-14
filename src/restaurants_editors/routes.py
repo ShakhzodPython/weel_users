@@ -63,6 +63,7 @@ async def sign_in(
         password: str = Form(...),
         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка входа в аккаунт с именем пользователя: %s", username)
+    translations = await get_language_user(request)
 
     restaurant_editor = await db.scalar(
         select(User)
@@ -72,17 +73,15 @@ async def sign_in(
 
     if restaurant_editor is None or not restaurant_editor.verify_password(password):
         logger.error("Не верное имя пользователя или пароль")
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Incorrect username or password")
+        error_msg = translations.get("re_error")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error_msg)
 
     access_token = create_access_token(
         data={"user_uuid": restaurant_editor.uuid, "role": restaurant_editor.roles[0].name})
     refresh_token = create_refresh_token(
         data={"user_uuid": restaurant_editor.uuid, "role": restaurant_editor.roles[0].name})
 
-    translations = await get_language_user(request)
-    success_msg = translations.get("restaurant_editor_sign_in").format(username=username)
-
-
+    success_msg = translations.get("re_sign_in").format(username=username)
 
     logger.success("Редактор ресторанов с именем пользователя: %s вошел в аккаунт успешно", username)
     return {
