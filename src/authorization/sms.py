@@ -3,6 +3,7 @@ from fastapi import Request, HTTPException, status
 from random import randint
 from aiohttp import ClientSession
 
+from config.database import close_redis_connection
 from logs.logger import logger
 from src.authorization.rate_limeter import limiter
 from src.authorization.redis import get_redis_connection
@@ -32,21 +33,21 @@ async def get_eskiz_token(email: str, password: str):
                 response_data = await response.json()
                 if response.status == 200 and "data" in response_data:
                     token = response_data["data"]["token"]
-                    await redis.set("eskiz_token", token, expire=3600)
+                    await redis.set("eskiz_token", token, ex=3600)
                     logger.info("Новый токен Eskiz получен и сохранён в Redis")
                 else:
                     logger.error("Не удалось пройти аутентификацию в API Eskiz")
                     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                                         detail="Не удалось пройти аутентификацию в API Eskiz")
     finally:
-        redis.close()
-        await redis.wait_closed()
+        await close_redis_connection()
     return token
 
 
 @limiter.limit("2/minute")
 async def send_sms(request: Request, phone_number: str, message: str, token: str):
     url = "https://notify.eskiz.uz/api/message/sms/send"
+
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json"

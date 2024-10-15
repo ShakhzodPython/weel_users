@@ -5,8 +5,8 @@ from logs.logger import logger
 async def save_verification_code(phone_number: str, code: str):
     try:
         redis = await get_redis_connection()
-        await redis.set(f"verification_code:{code}", phone_number, expire=180)
-        await redis.set(f"phone_number:{phone_number}", code, expire=180)
+        await redis.set(f"verification_code:{code}", phone_number, ex=180)
+        await redis.set(f"phone_number:{phone_number}", code, ex=180)
         logger.success(f"Код подтверждения успешно сохранен для {phone_number}")
     except Exception as e:
         logger.error(f"Произошла ошибка при сохранений кода подтверждения: {e}")
@@ -56,7 +56,7 @@ async def block_user(phone_number: str):
     try:
         redis = await get_redis_connection()
         block_key = f"block:{phone_number}"
-        await redis.set(block_key, "blocked", expire=300)  # Блокировка на 5 минут
+        await redis.set(block_key, "blocked", ex=300)  # Блокировка на 5 минут
         logger.info(f"Пользователь: {phone_number} был заблокирован на 5 минут")
     finally:
         await close_redis_connection()

@@ -1,3 +1,5 @@
+import asyncio
+
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
@@ -52,11 +54,6 @@ async def log_ip(request: Request, call_next):
     contextual_filter.ip = ip
     response = await call_next(request)
     return response
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    await close_redis_connection()
 
 
 app.mount("/static", StaticFiles(directory="static"), name="static")

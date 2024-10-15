@@ -9,6 +9,7 @@ from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
+from config.settings import STPimsApiPartnerKey, LOGIN, PASSWORD
 from logs.logger import logger
 from config.database import get_db
 from config.security import get_current_user, hash_data, is_superuser

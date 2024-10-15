@@ -1,4 +1,5 @@
 import jwt
+
 from fastapi import APIRouter, HTTPException, Depends, Request, status, Form
 
 from slowapi.errors import RateLimitExceeded
@@ -7,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
 from config.settings import ESKIZ_EMAIL, ESKIZ_PASSWORD, SECRET_KEY, ALGORITHM
-from config.security import create_access_token, create_refresh_token, get_api_key
+from config.security import create_access_token, create_refresh_token
 from config.database import get_db
 from logs.logger import logger
 from src.users.models import User, Role
@@ -40,7 +41,7 @@ async def sign_up(request: Request,
                                 detail="User with this phone number already exist")
 
         verification_code = generate_verification_code()
-        await save_verification_code(phone_number, verification_code)
+        await save_verification_code(valid_phone_number, verification_code)
 
         token = await get_eskiz_token(ESKIZ_EMAIL, ESKIZ_PASSWORD)
         response = await send_sms(request, valid_phone_number,

@@ -1,4 +1,5 @@
-import aioredis  # Версия 1.3.1
+import redis.asyncio as aioredis
+
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
@@ -19,10 +20,11 @@ async def get_db() -> AsyncSession:
 
 async def get_redis_connection():
     redis_url = f"redis://{REDIS_HOST}:{REDIS_PORT}"
-    return await aioredis.create_redis_pool(address=redis_url,
-                                            encoding="utf-8",
-                                            # password=REDIS_PASSWORD,
-                                            db=int(REDIS_DB))
+    return await aioredis.from_url(url=redis_url,
+                                   encoding="utf-8",
+                                   decode_responses=True,
+                                   # password=REDIS_PASSWORD,
+                                   db=int(REDIS_DB))
 
 
 async def close_redis_connection():
@@ -30,4 +32,3 @@ async def close_redis_connection():
     if redis:
         redis = await get_redis_connection()
         redis.close()
-        await redis.wait_close()

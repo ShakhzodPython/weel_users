@@ -63,7 +63,7 @@ def hash_data(data, salt="some_salt"):
     return hashlib.sha256((data + salt).encode()).hexdigest()
 
 
-def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes=60)):
+def create_access_token(data: dict, expires_delta: timedelta = timedelta(hours=24)):
     try:
         to_encode = data.copy()
         to_encode["user_uuid"] = str(to_encode["user_uuid"])
@@ -78,7 +78,7 @@ def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes
                             detail=f"Internal server error: {str(e)}")
 
 
-def create_refresh_token(data: dict, expires_delta: timedelta = timedelta(days=180)):
+def create_refresh_token(data: dict, expires_delta: timedelta = timedelta(days=365)):
     try:
         to_encode = data.copy()
         to_encode["user_uuid"] = str(to_encode["user_uuid"])

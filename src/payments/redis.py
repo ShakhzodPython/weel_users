@@ -32,8 +32,8 @@ async def get_confirm_id(user_uuid: UUID):
 async def save_card(user_uuid: UUID, card_number: str, expiry_date: str):
     try:
         redis = await get_redis_connection()
-        await redis.set(f"card_number:{user_uuid}", card_number, expire=60)
-        await redis.set(f"expiry_date:{user_uuid}", expiry_date, expire=60)
+        await redis.set(f"card_number:{user_uuid}", card_number, ex=60)
+        await redis.set(f"expiry_date:{user_uuid}", expiry_date, ex=60)
     except Exception as e:
         logger.error(f"Ошибка при сохранении данных карты в Redis: {e}")
         print(f"Error when saving card data in Redis: {e}")
@@ -68,7 +68,6 @@ async def save_uzcard_id(user_uuid: UUID, uzcard_id: int):
 
 
 async def get_uzcard_id(user_uuid: UUID):
-    redis = None
     try:
         redis = await get_redis_connection()
         # Получаем uzcard_id по ключу, который включает user_uuid
