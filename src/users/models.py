@@ -62,8 +62,8 @@ class Card(Base):
 
     users = relationship("User", back_populates="cards")
 
-    def __repr__(self):
-        return f"User: {self.users.full_name} | {self.user.phone_number}"
+    def __str__(self):
+        return
 
 
 class Wallet(Base):
