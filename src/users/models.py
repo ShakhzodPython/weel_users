@@ -29,7 +29,8 @@ class User(Base):
     phone_number: Mapped[str] = mapped_column(String(11), unique=True)
     full_name: Mapped[str] = mapped_column(String(100), nullable=True)
     email: Mapped[str] = mapped_column(String(100), nullable=True, unique=True)
-    image: Mapped[int] = mapped_column(Integer, ForeignKey("media.id"), nullable=True)
+    image_id: Mapped[int] = mapped_column(Integer, ForeignKey("media.id"), nullable=True)
+    role_id: Mapped[int] = mapped_column(Integer, ForeignKey("roles.id"))
     updated_at: Mapped[DateTime | None] = mapped_column(DateTime, onupdate=func.now(), nullable=True)
     registered_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
 

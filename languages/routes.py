@@ -44,7 +44,7 @@ async def get_language_user(request: Request):
     return translations
 
 
-@router_translation.post("/api/v1/language/{language}/")
+@router_translation.post("/language/{language}/")
 async def get_language(language: str,
                        response: Response):
     message = get_translations(response, language)
