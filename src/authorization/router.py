@@ -24,7 +24,7 @@ router_auth = APIRouter(
 
 
 # TODO: integrate celery with sending sms
-@router_auth.post("/sign_up/", status_code=status.HTTP_200_OK)
+@router_auth.post("/sign_up", status_code=status.HTTP_200_OK)
 async def sign_up(request: Request,
                   phone_number: str = Form(...),
                   db: AsyncSession = Depends(get_db)):
@@ -61,7 +61,7 @@ async def sign_up(request: Request,
         raise HTTPException(status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail="Too many requests")
 
 
-@router_auth.post("/sign_up/verify/", status_code=status.HTTP_201_CREATED)
+@router_auth.post("/sign_up/verify", status_code=status.HTTP_201_CREATED)
 async def verify_code(code: str = Form(...),
                       db: AsyncSession = Depends(get_db)):
     phone_number = await get_phone_number(code)
@@ -112,7 +112,7 @@ async def verify_code(code: str = Form(...),
     }
 
 
-@router_auth.post("/users/token/refresh/", status_code=status.HTTP_201_CREATED)
+@router_auth.post("/users/token/refresh", status_code=status.HTTP_201_CREATED)
 async def refresh_token(refresh_token: str,
                         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка создания refresh token")

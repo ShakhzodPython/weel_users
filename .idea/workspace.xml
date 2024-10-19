@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76c48cb5-a524-4c21-beec-882efb2d72bc" name="Changes" comment="fixed all bugs">
-      <change afterPath="$PROJECT_DIR$/alembic/versions/382d251d18ca_re_wrote_media_model_to_new_version_of_.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alembic/versions/dc7bb8e9e5f4_created_field_roled_id_for_model_user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/users/filters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/endpoints/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/languages/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/languages/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/console.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/console.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/authorization/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/authorization/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/couriers/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/couriers/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/couriers/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/couriers/schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/media/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/media/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/payments/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/payments/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/restaurants_editors/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/restaurants_editors/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/superusers/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/superusers/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/superusers/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/superusers/schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/users/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/users/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/schemas.py" afterDir="false" />
-    </list>
+    <list default="true" id="76c48cb5-a524-4c21-beec-882efb2d72bc" name="Changes" comment="fixed all bugs" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -114,7 +93,7 @@
       <workItem from="1729143626237" duration="60000" />
       <workItem from="1729143808034" duration="5672000" />
       <workItem from="1729249191607" duration="1301000" />
-      <workItem from="1729318777673" duration="13735000" />
+      <workItem from="1729318777673" duration="14066000" />
     </task>
     <task id="LOCAL-00001" summary="aioredis library updated to last version">
       <option name="closed" value="true" />
