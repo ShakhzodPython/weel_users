@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="76c48cb5-a524-4c21-beec-882efb2d72bc" name="Changes" comment="fixed all bugs">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/5d9a75ed0f8b_setup_migrations_for_weel_users.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/console.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/console.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/media/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/media/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/models.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2nScLLOMayCQG6m0famW5ZfgSbR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="76c48cb5-a524-4c21-beec-882efb2d72bc" name="Changes" comment="" />
+      <created>1728969862848</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728969862848</updated>
+      <workItem from="1728969864481" duration="1429000" />
+      <workItem from="1728974860077" duration="7614000" />
+      <workItem from="1728985146738" duration="4328000" />
+      <workItem from="1728993059204" duration="3600000" />
+      <workItem from="1729006049062" duration="68000" />
+      <workItem from="1729057906742" duration="10080000" />
+      <workItem from="1729143626237" duration="60000" />
+      <workItem from="1729143808034" duration="5672000" />
+      <workItem from="1729249191607" duration="1301000" />
+      <workItem from="1729318777673" duration="6278000" />
+    </task>
+    <task id="LOCAL-00001" summary="aioredis library updated to last version">
+      <option name="closed" value="true" />
+      <created>1729006081095</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1729006081095</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fixed all bugs">
+      <option name="closed" value="true" />
+      <created>1729325578922</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729325578922</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="executable:kubectl" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="aioredis library updated to last version" />
+    <MESSAGE value="fixed all bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed all bugs" />
+  </component>
+</project>

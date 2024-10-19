@@ -11,7 +11,7 @@ class Media(Base):
     filename = Column(String(225), nullable=False)
     uploaded_at = Column(DateTime, server_default=func.now())
 
-    user = relationship("User", back_populates="media")
+    users = relationship("User", back_populates="media")
 
     def __str__(self):
         return f"File: {self.filename}"
