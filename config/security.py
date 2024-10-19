@@ -63,7 +63,7 @@ def hash_data(data, salt="some_salt"):
     return hashlib.sha256((data + salt).encode()).hexdigest()
 
 
-def create_access_token(data: dict, expires_delta: timedelta = timedelta(hours=24)):
+def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes=60)):
     try:
         to_encode = data.copy()
         to_encode["user_uuid"] = str(to_encode["user_uuid"])
@@ -150,7 +150,7 @@ async def is_courier(token: str = Depends(JWTBearer()),
         .where(User.uuid == user_uuid)
     )
 
-    if not user:
+    if user is None:
         logger.error(f"Курьер с UUID: {user_uuid} не найден")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Courier not found")
 
