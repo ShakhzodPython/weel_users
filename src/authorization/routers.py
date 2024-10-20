@@ -115,7 +115,7 @@ async def verify_code(code: str = Form(...),
 
 
 @router_auth.post("/users/token/refresh", status_code=status.HTTP_201_CREATED)
-async def refresh_token(refresh_token: str,
+async def refresh_token(refresh_token: str = Form(...),
                         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка создания refresh token")
     try:
