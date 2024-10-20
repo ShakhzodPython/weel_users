@@ -1,32 +1,34 @@
 import os
 import jwt
 
-from typing import List
 from uuid import UUID
 
 from fastapi import APIRouter, Form, Depends, HTTPException, Response, status, File, UploadFile
+from fastapi_pagination import Page, paginate
 from sqlalchemy import asc, or_
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from config.settings import SECRET_KEY, ALGORITHM, UPLOAD_DIR
-from config.security import create_access_token, create_refresh_token, is_superuser
+from config.settings import get_settings, UPLOAD_DIR
+from config.security import create_access_token, create_refresh_token, is_superuser, is_courier
 from config.database import get_db
 from logs.logger import logger
 from src.superusers.utils import validate_password, validate_username
 from src.authorization.utils import check_phone
-from src.couriers.schemas import CourierSchemas, CourierUpdate, CourierDetailSchemas
+from src.couriers.schemas import CourierSchemas, CourierDetailSchemas, CourierUpdate
 from src.media.models import Media
 from src.media.utils import save_image
 from src.users.models import User, Role
 
+settings = get_settings()
+
 router_couriers = APIRouter(
-    tags=["Couriers"]
+    tags=["couriers"]
 )
 
 
-@router_couriers.post("/auth/couriers/sign_up", response_model=CourierSchemas,
+@router_couriers.post("/auth/couriers/sign_up",
                       status_code=status.HTTP_201_CREATED)
 async def sign_up(username: str = Form(...),
                   password: str = Form(...),
@@ -37,10 +39,10 @@ async def sign_up(username: str = Form(...),
                   db: AsyncSession = Depends(get_db)):
     logger.info("Попытка создания курьера с именем пользователя: %s", username)
 
-    role = await db.scalar(select(Role).where(Role.name == "COURIER"))
+    role = await db.scalar(select(Role).where(Role.title == "courier"))
 
     if role is None:
-        logger.error("Роль: COURIER не найдена")
+        logger.error("Роль: courier не найдена")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
 
     existing_user = await db.scalar(
@@ -84,7 +86,7 @@ async def sign_up(username: str = Form(...),
         full_name=full_name,
         phone_number=await check_phone(phone_number),
         image_id=new_media.id,
-        roles=[role])
+        role_id=role.id)
     new_courier.set_password(validate_password(password))
 
     db.add(new_courier)
@@ -92,7 +94,7 @@ async def sign_up(username: str = Form(...),
     await db.refresh(new_courier)
 
     logger.success("Курьер с именем пользователя: %s создался успешно", username)
-    return CourierSchemas.from_orm(new_courier)
+    return {"detail": f"Courier with username: {username} created successfully"}
 
 
 @router_couriers.post("/auth/couriers/sign_in", status_code=status.HTTP_200_OK)
@@ -104,7 +106,7 @@ async def sign_in(username: str = Form(...),
     courier = await db.scalar(
         select(User).
         options(selectinload(User.roles))
-        .where(User.roles.has(title="COURIER"), User.username == username)
+        .where(User.roles.has(title="courier"), User.username == username)
     )
 
     if courier is None or not courier.verify_password(password):
@@ -112,9 +114,9 @@ async def sign_in(username: str = Form(...),
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Incorrect username or password")
 
     access_token = create_access_token(
-        data={"user_uuid": courier.uuid, "role": courier.roles[0].name})
+        data={"user_uuid": courier.uuid, "role": courier.roles.title})
     refresh_token = create_refresh_token(
-        data={"user_uuid": courier.uuid, "role": courier.roles[0].name})
+        data={"user_uuid": courier.uuid, "role": courier.roles.title})
 
     logger.success("Курьер с именем пользователя: %s успешно вошел в аккаунт", username)
     return {
@@ -131,12 +133,12 @@ async def refresh_token(refresh_token: str = Form(...),
     logger.info("Попытка создания refresh token")
 
     try:
-        payload = jwt.decode(jwt=refresh_token, key=SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(refresh_token, settings.JWT_SECRET, algorithms=settings.JWT_ALGORITHM)
         user_uuid = payload.get("user_uuid")
-        courier_role = payload.get("role")
+        role = payload.get("role")
 
-        if courier_role != "COURIER":
-            logger.error("Роль: COURIER не найдена")
+        if role != "courier":
+            logger.error("Роль: courier не найдена")
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
 
     except jwt.ExpiredSignatureError:
@@ -145,42 +147,42 @@ async def refresh_token(refresh_token: str = Form(...),
     except Exception:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Token invalid")
 
-    role = await db.scalar(select(Role).where(Role.name == "COURIER"))
+    role = await db.scalar(select(Role).where(Role.title == "courier"))
 
-    new_access_token = create_access_token(data={"user_uuid": user_uuid, "role": role.name})
+    access_token = create_access_token(data={"user_uuid": user_uuid, "role": role.title})
     logger.success("Токен успешно обновлён для курьера с UUID: %s", user_uuid)
-    return {"access_token": new_access_token}
+    return {"access_token": access_token}
 
 
 # TODO: сделать поиск по имя пользователя
-@router_couriers.get("/couriers/", response_model=List[CourierSchemas],
+@router_couriers.get("/couriers/", response_model=Page[CourierSchemas],
                      status_code=status.HTTP_200_OK)
 async def get_couriers(
-        # username: str = Query(None),
-        # current_user: User = Depends(is_superuser),
+        current_user: User = Depends(is_superuser),
         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка получения всех курьеров")
 
     stmt = await db.scalars(
         select(User)
-        .options(selectinload(User.media), selectinload(User.roles))
-        .where(User.roles.has(title="COURIER"))
+        .options(selectinload(User.media),
+                 selectinload(User.roles))
+        .where(User.roles.has(title="courier"))
         .order_by(asc(User.uuid))
     )
     couriers = stmt.all()
 
     logger.success("Все курьеры получены успешно")
-    return [CourierSchemas.from_orm(courier) for courier in couriers]
+    return paginate(couriers)
 
 
 @router_couriers.get("/couriers/{user_uuid}", response_model=CourierDetailSchemas,
                      status_code=status.HTTP_200_OK)
 async def get_courier_by_uuid(user_uuid: UUID,
-                              current_user: User = Depends(is_superuser),
+                              current_user: User = Depends(is_courier),
                               db: AsyncSession = Depends(get_db)):
     logger.info("Попытка получение курьера с UUID: %s", user_uuid)
 
-    if "SUPERUSER" not in [role.name for role in current_user.roles] and current_user.uuid != user_uuid:
+    if current_user != "superuser" and current_user.uuid != user_uuid:
         logger.error("Доступ запрещен: У вас недостаточно прав")
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="Access denied: You don't have enough privileges")
@@ -188,9 +190,9 @@ async def get_courier_by_uuid(user_uuid: UUID,
     courier = await db.scalar(
         select(User)
         .options(
-            selectinload(User.roles),
-            selectinload(User.media))
-        .where(User.roles.has(title="COURIER"), User.uuid == user_uuid))
+            selectinload(User.media),
+            selectinload(User.roles))
+        .where(User.roles.has(title="courier"), User.uuid == user_uuid))
 
     if courier is None:
         logger.error("Курьер c UUID: %s не найден", user_uuid)
@@ -200,14 +202,15 @@ async def get_courier_by_uuid(user_uuid: UUID,
     return CourierDetailSchemas.from_orm(courier)
 
 
-@router_couriers.put("/couriers/{user_uuid}", response_model=CourierSchemas, status_code=status.HTTP_200_OK)
+@router_couriers.put("/couriers/{user_uuid}", response_model=CourierSchemas,
+                     status_code=status.HTTP_200_OK)
 async def update_courier(user_uuid: UUID,
                          objects: CourierUpdate,
-                         current_user: User = Depends(is_superuser),
+                         current_user: User = Depends(is_courier),
                          db: AsyncSession = Depends(get_db)):
     logger.info("Попытка обновить курьера с UUID: %s", user_uuid)
 
-    if "SUPERUSER" not in [role.name for role in current_user.roles] and user_uuid != current_user.uuid:
+    if current_user != "superuser" and current_user.uuid != user_uuid:
         logger.error("Доступ запрещен: У вас недостаточно прав")
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="Access denied: You don't have enough privileges")
@@ -215,7 +218,7 @@ async def update_courier(user_uuid: UUID,
     courier = await db.scalar(
         select(User)
         .options(selectinload(User.roles))
-        .where(User.roles.has(title="COURIER"), User.uuid == user_uuid)
+        .where(User.roles.has(title="courier"), User.uuid == user_uuid)
     )
 
     if courier is None:
@@ -255,7 +258,7 @@ async def delete_courier(user_uuid: UUID,
                          db: AsyncSession = Depends(get_db)):
     logger.info("Попытка удаления курьера с UUID: %s", user_uuid)
 
-    if "SUPERUSER" not in [role.name for role in current_user.roles] and user_uuid != current_user.uuid:
+    if current_user != "superuser" and current_user.uuid != user_uuid:
         logger.error("Доступ запрещен: У вас недостаточно прав")
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="Access denied: You don't have enough privileges")
@@ -263,7 +266,7 @@ async def delete_courier(user_uuid: UUID,
     courier = await db.scalar(
         select(User)
         .options(selectinload(User.roles), selectinload(User.media))
-        .where(User.roles.has(title="COURIER"), User.uuid == user_uuid)
+        .where(User.roles.has(title="courier"), User.uuid == user_uuid)
     )
 
     if courier is None:

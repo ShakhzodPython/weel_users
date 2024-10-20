@@ -1,19 +1,20 @@
 from datetime import datetime
 
-from typing import Optional, List
+from typing import Optional
 from uuid import UUID
 
 from pydantic import BaseModel, EmailStr
 
+from src.media.schemas import MediaSchemas
 from src.superusers.schemas import RolesSchemas
 
 
-class CardSchemas(BaseModel):
-    id: int
-    is_blacklisted: bool
-
-    class Config:
-        from_attributes = True
+# class Card(BaseModel):
+#     id: int
+#     is_blacklisted: bool
+#
+#     class Config:
+#         from_attributes = True
 
 
 class UserUpdate(BaseModel):
@@ -38,8 +39,9 @@ class UserDetailSchemas(BaseModel):
     uuid: UUID
     full_name: Optional[str] = None
     roles: RolesSchemas
-    cards: List[CardSchemas]
+    # cards: List[CardSchemas]
     email: Optional[EmailStr] = None
+    media: Optional[MediaSchemas] = None
     phone_number: str
     updated_at: Optional[datetime] = None
     registered_at: datetime

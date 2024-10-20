@@ -20,6 +20,9 @@ class CourierSchemas(BaseModel):
     full_name: Optional[str] = None
     phone_number: str
 
+    class Config:
+        from_attributes = True
+
 
 class CourierDetailSchemas(BaseModel):
     uuid: UUID

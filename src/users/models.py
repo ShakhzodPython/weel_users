@@ -1,7 +1,7 @@
 import bcrypt
 import uuid
 
-from sqlalchemy import Integer, String, DateTime, ForeignKey, Table, Boolean, Text
+from sqlalchemy import Integer, String, DateTime, ForeignKey, Boolean, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
@@ -12,7 +12,7 @@ from src.media.models import Media
 
 class Role(Base):
     __tablename__ = "roles"
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     description: Mapped[str] = mapped_column(Text)
     updated_at: Mapped[DateTime | None] = mapped_column(DateTime, onupdate=func.now(), nullable=True)
@@ -26,7 +26,7 @@ class User(Base):
     uuid: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
     username: Mapped[str] = mapped_column(String(100), unique=True, nullable=True)
     hash_password: Mapped[str] = mapped_column(String(128), nullable=True)
-    phone_number: Mapped[str] = mapped_column(String(11), unique=True)
+    phone_number: Mapped[str] = mapped_column(String(11), unique=True, nullable=True)
     full_name: Mapped[str] = mapped_column(String(100), nullable=True)
     email: Mapped[str] = mapped_column(String(100), nullable=True, unique=True)
     image_id: Mapped[int] = mapped_column(Integer, ForeignKey("media.id"), nullable=True)
@@ -52,7 +52,7 @@ class User(Base):
 
 class Card(Base):
     __tablename__ = "cards"
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_uuid: Mapped[UUID] = mapped_column(UUID(as_uuid=True), ForeignKey('user.uuid'))
     card_number_hashed: Mapped[str] = mapped_column(String(225), unique=True)
     expiry_date_hashed: Mapped[str] = mapped_column(String(225))
@@ -68,7 +68,7 @@ class Card(Base):
 
 class Wallet(Base):
     __tablename__ = "wallet"
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_uuid: Mapped[UUID] = mapped_column(UUID(as_uuid=True), ForeignKey('user.uuid'))
     card_id: Mapped[int] = mapped_column(Integer, ForeignKey("cards.id"))
     profit: Mapped[int] = mapped_column(Integer)  # заплата
@@ -83,7 +83,7 @@ class Wallet(Base):
 
 class WorkSchedule(Base):
     __tablename__ = "work_schedule"
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_uuid: Mapped[UUID] = mapped_column(UUID(as_uuid=True), ForeignKey('user.uuid'))
     day_of_week: Mapped[str] = mapped_column(String, nullable=False)
     start_time: Mapped[int] = mapped_column(Integer, nullable=False)

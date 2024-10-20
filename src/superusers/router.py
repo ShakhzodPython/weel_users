@@ -3,23 +3,26 @@ from typing import List
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Form, Response, status
+from fastapi_pagination import Page, paginate
 
 from sqlalchemy import asc
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 
-from config.settings import SECRET_KEY, ALGORITHM
+from config.settings import get_settings
 from config.security import get_api_key, create_access_token, create_refresh_token, is_superuser
 from logs.logger import logger
 from config.database import get_db
-from src.superusers.schemas import SuperuserSchemas, SuperuserUpdate, RolesSchemas
+from src.superusers.schemas import SuperUserSchemas, SuperUserDetailSchemas, SuperUserUpdate, RolesSchemas
 from src.superusers.utils import validate_password, validate_username
 from src.authorization.utils import check_phone
 from src.users.models import User, Role
 
+settings = get_settings()
+
 router_admin = APIRouter(
-    tags=["Administration"]
+    tags=["superusers and roles"],
 )
 
 
@@ -30,10 +33,9 @@ async def sign_up(username: str = Form(...),
                   db: AsyncSession = Depends(get_db)):
     logger.info("Попытка создания администратора с именем пользователя: %s", username)
 
-    role = await db.scalar(select(Role).where(Role.name == "SUPERUSER"))
-
+    role = await db.scalar(select(Role).where(Role.title == "superuser"))
     if role is None:
-        logger.error("Роль с названием: SUPERUSER не найдена")
+        logger.error("Роль с названием: superuser не найдена")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
 
     existing_username = await db.scalar(
@@ -46,7 +48,7 @@ async def sign_up(username: str = Form(...),
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="Superuser with this username already exist")
 
-    new_superuser = User(username=validate_username(username), roles=[role])
+    new_superuser = User(username=validate_username(username), role_id=role.id)
     new_superuser.set_password(validate_password(password))
 
     db.add(new_superuser)
@@ -63,17 +65,22 @@ async def sign_in(username: str = Form(...),
                   db: AsyncSession = Depends(get_db)):
     logger.info("Попытка входа в аккаунт с именем пользователя: %s", username)
 
-    superuser = await db.scalar(select(User).options(selectinload(User.roles)).where(
-        User.roles.has(title="SUPERUSER"), User.username == username))
+    superuser = await db.scalar(
+        select(User)
+        .options(selectinload(User.roles))
+        .where(
+            User.roles.has(title="superuser"),
+            User.username == username)
+    )
 
     if superuser is None or not superuser.verify_password(password):
         logger.error("Не верное имя пользователя или пароль для администратора: %s", username)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Incorrect username or password")
 
     access_token = create_access_token(
-        data={"user_uuid": superuser.uuid, "role": superuser.roles[0].name})
+        data={"user_uuid": superuser.uuid, "role": superuser.roles.title})
     refresh_token = create_refresh_token(
-        data={"user_uuid": superuser.uuid, "role": superuser.roles[0].name})
+        data={"user_uuid": superuser.uuid, "role": superuser.roles.title})
 
     logger.success("Администратор с именем пользователя: %s вошел в аккаунт успешно", username)
     return {
@@ -89,12 +96,12 @@ async def refresh_token(refresh_token: str = Form(...),
     logger.info("Попытка создания refresh token")
 
     try:
-        payload = jwt.decode(refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(refresh_token, settings.JWT_SECRET, algorithms=settings.JWT_ALGORITHM)
         superuser_uuid = payload.get("user_uuid")
 
-        superuser_role = payload.get("role")
-        if superuser_role != "SUPERUSER":
-            logger.error("Роль: SUPERUSER не найдено")
+        role = payload.get("role")
+        if role != "superuser":
+            logger.error("Роль: superuser не найдено")
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
 
     except jwt.ExpiredSignatureError:
@@ -104,15 +111,15 @@ async def refresh_token(refresh_token: str = Form(...),
     except Exception:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Token invalid")
 
-    role = await db.scalar(select(Role).where(Role.name == "SUPERUSER"))
-    new_access_token = create_access_token(data={"user_uuid": superuser_uuid, "role": role.name})
+    role = await db.scalar(select(Role).where(Role.title == "superuser"))
+    access_token = create_access_token(data={"user_uuid": superuser_uuid, "role": role.title})
 
     logger.success("Токен успешно обновлён для администратора с UUID: %s", superuser_uuid)
-    return {"access_token": new_access_token}
+    return {"access_token": access_token}
 
 
 # TODO: Сделать поиск по имя пользователя администратора
-@router_admin.get("/superusers/", response_model=List[SuperuserSchemas],
+@router_admin.get("/superusers/", response_model=Page[SuperUserSchemas],
                   status_code=status.HTTP_200_OK)
 async def get_superusers(
         current_user: User = Depends(is_superuser),
@@ -122,16 +129,16 @@ async def get_superusers(
     stmt = await db.scalars(
         select(User)
         .options(selectinload(User.roles))
-        .where(User.roles.has(title="SUPERUSER"))
+        .where(User.roles.has(title="superuser"))
         .order_by(asc(User.uuid))
     )
     superusers = stmt.all()
 
     logger.success("Все администраторы получены успешно")
-    return [SuperuserSchemas.from_orm(superuser) for superuser in superusers]
+    return paginate(superusers)
 
 
-@router_admin.get("/superusers/{superuser_uuid}", response_model=SuperuserSchemas,
+@router_admin.get("/superusers/{superuser_uuid}", response_model=SuperUserDetailSchemas,
                   status_code=status.HTTP_200_OK)
 async def get_superuser_by_uuid(superuser_uuid: UUID,
                                 current_user: User = Depends(is_superuser),
@@ -145,8 +152,9 @@ async def get_superuser_by_uuid(superuser_uuid: UUID,
 
     superuser = await db.scalar(
         select(User)
-        .options(selectinload(User.roles))
-        .where(User.roles.has(title="SUPERUSER"), User.uuid == superuser_uuid)
+        .options(selectinload(User.media),
+                 selectinload(User.roles))
+        .where(User.roles.has(title="superuser"), User.uuid == superuser_uuid)
     )
 
     if superuser is None:
@@ -154,13 +162,13 @@ async def get_superuser_by_uuid(superuser_uuid: UUID,
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Superuser not found")
 
     logger.success("Администратор с UUID: %s успешно получен", superuser_uuid)
-    return SuperuserSchemas.from_orm(superuser)
+    return SuperUserDetailSchemas.from_orm(superuser)
 
 
-@router_admin.put("/superusers/{superuser_uuid}", response_model=SuperuserSchemas,
+@router_admin.put("/superusers/{superuser_uuid}", response_model=SuperUserSchemas,
                   status_code=status.HTTP_200_OK)
 async def update_superuser(superuser_uuid: UUID,
-                           objects: SuperuserUpdate,
+                           objects: SuperUserUpdate,
                            current_user: User = Depends(is_superuser),
                            db: AsyncSession = Depends(get_db)):
     logger.info("Попытка обновления администратора с UUID: %s", superuser_uuid)
@@ -173,7 +181,7 @@ async def update_superuser(superuser_uuid: UUID,
     superuser = await db.scalar(
         select(User)
         .options(selectinload(User.roles))
-        .where(User.roles.has(title="SUPERUSER"), User.uuid == superuser_uuid)
+        .where(User.roles.has(title="superuser"), User.uuid == superuser_uuid)
     )
 
     if superuser is None:
@@ -204,7 +212,7 @@ async def update_superuser(superuser_uuid: UUID,
     await db.refresh(superuser)
 
     logger.success("Администратор с UUID: %s успешно обновлен", superuser_uuid)
-    return SuperuserSchemas.from_orm(superuser)
+    return SuperUserSchemas.from_orm(superuser)
 
 
 @router_admin.delete("/superusers/{superuser_uuid}", status_code=status.HTTP_204_NO_CONTENT)
@@ -221,7 +229,7 @@ async def delete_superuser(superuser_uuid: UUID,
     superuser = await db.scalar(
         select(User)
         .options(selectinload(User.roles))
-        .where(User.roles.has(title="SUPERUSER"), User.uuid == superuser_uuid)
+        .where(User.roles.has(title="superuser"), User.uuid == superuser_uuid)
     )
 
     if superuser is None:
@@ -280,7 +288,7 @@ async def create_role(
         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка создания роли c названием: %s", title)
 
-    existing_role = await db.scalar(select(Role).where(Role.name == title))
+    existing_role = await db.scalar(select(Role).where(Role.title == title))
 
     if existing_role:
         logger.error("Роль с названием: %s уже существует", title)
@@ -298,7 +306,7 @@ async def create_role(
 @router_admin.put("/roles/{role_id}", response_model=RolesSchemas,
                   status_code=status.HTTP_200_OK)
 async def update_role(role_id: int,
-                      name: str = Form(...),
+                      title: str = Form(...),
                       description: str = Form(...),
                       current_user: User = Depends(is_superuser),
                       db: AsyncSession = Depends(get_db)):
@@ -310,18 +318,18 @@ async def update_role(role_id: int,
         logger.error("Роль с ID: %s не найдена", role_id)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
 
-    existing_role = await db.scalar(select(Role).where(Role.name == name, Role.id != role_id))
+    existing_role = await db.scalar(select(Role).where(Role.title == title, Role.id != role_id))
 
     if existing_role:
-        logger.error("Роль с названием: %s уже существует", name)
+        logger.error("Роль с названием: %s уже существует", title)
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Role with this name already exist")
 
-    role.name = name
+    role.title = title
     role.description = description
     await db.commit()
     await db.refresh(role)
 
-    logger.success("Роль с ID: %s обновлено успешно", name)
+    logger.success("Роль с ID: %s обновлено успешно", title)
     return RolesSchemas.from_orm(role)
 
 
@@ -364,6 +372,7 @@ async def change_roles(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
     role = await db.scalar(select(Role).where(Role.id == role_id))
+
     if role is None:
         logger.error("Роль с ID: %s не найдена", role_id)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
@@ -373,13 +382,13 @@ async def change_roles(
     await db.commit()
 
     access_token = create_access_token(
-        data={"user_uuid": user.uuid, "role": role.name})
+        data={"user_uuid": user.uuid, "role": role.title})
     refresh_token = create_refresh_token(
-        data={"user_uuid": user.uuid, "role": role.name})
+        data={"user_uuid": user.uuid, "role": role.title})
 
-    logger.success("Пользователь с UUID: %s сменил роль на %s", current_user.uuid, role.name)
+    logger.success("Пользователь с UUID: %s сменил роль на %s", current_user.uuid, role.title)
     return {
         "access_token": access_token,
         "refresh_token": refresh_token,
-        "detail": f"Пользователь с ID: {current_user.uuid} сменил роль на {role.name}"
+        "detail": f"Пользователь с UUID: {current_user.uuid} сменил роль на {role.title}"
     }

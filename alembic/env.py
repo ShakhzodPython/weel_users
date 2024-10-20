@@ -5,10 +5,10 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from config.settings import DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
+from config.settings import get_settings
 from config.database import Base
 # Импорт всех модулей для миграции в бд
-from src.users.models import User, Card, Wallet, WorkSchedule
+from src.users.models import Role, User, Card, Wallet, WorkSchedule
 from src.media.models import Media
 
 # this is the Alembic Config object, which provides
@@ -20,7 +20,9 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+settings = get_settings()
+
+DATABASE_URL = f"postgresql://{settings.DB_USER}:{settings.DB_PASSWORD}@{settings.DB_HOST}/{settings.DB_NAME}"
 
 # Установите строку подключения в конфигурацию alembic.ini
 config.set_main_option('sqlalchemy.url', DATABASE_URL)

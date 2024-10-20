@@ -40,7 +40,7 @@ async def get_eskiz_token(email: str, password: str):
                     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                                         detail="Не удалось пройти аутентификацию в API Eskiz")
     finally:
-        await close_redis_connection()
+        await close_redis_connection(redis)
     return token
 
 

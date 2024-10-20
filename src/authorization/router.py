@@ -7,7 +7,7 @@ from slowapi.errors import RateLimitExceeded
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from config.settings import ESKIZ_EMAIL, ESKIZ_PASSWORD, SECRET_KEY, ALGORITHM
+from config.settings import get_settings
 from config.security import create_access_token, create_refresh_token
 from config.database import get_db
 from logs.logger import logger
@@ -19,8 +19,10 @@ from .utils import check_phone
 
 router_auth = APIRouter(
     prefix="/auth",
-    tags=["Authorization"],
+    tags=["authorization"],
 )
+
+settings = get_settings()
 
 
 # TODO: integrate celery with sending sms
@@ -45,7 +47,7 @@ async def sign_up(request: Request,
         verification_code = generate_verification_code()
         await save_verification_code(valid_phone_number, verification_code)
 
-        token = await get_eskiz_token(ESKIZ_EMAIL, ESKIZ_PASSWORD)
+        token = await get_eskiz_token(settings.ESKIZ_EMAIL, settings.ESKIZ_PASSWORD)
         response = await send_sms(request, valid_phone_number,
                                   f"Код верификации для входа в приложение WEEL: {verification_code}",
                                   token)
@@ -89,26 +91,26 @@ async def verify_code(code: str = Form(...),
         # Сброс попыток после успешной верификации
         await reset_attempts(phone_number)
 
-    role = await db.scalar(select(Role).where(Role.name == "USER"))
+    role = await db.scalar(select(Role).where(Role.title == "user"))
     if role is None:
-        logger.error("Роль: USER не найдена")
+        logger.error("Роль: user не найдена")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Role not found")
 
     # Создание пользователя
-    user = User(phone_number=phone_number, roles=[role])
+    user = User(phone_number=phone_number, role_id=role.id)
     db.add(user)
     await db.commit()
     await db.refresh(user)
 
     # генерация JWT токена
-    logger.success("Пользователь c телефон номером: %s успешно зарегистрирован c ролью %s", phone_number, role.name)
-    access_token = create_access_token(data={"user_uuid": str(user.uuid), "role": role.name})
-    refresh_token = create_refresh_token(data={"user_uuid": str(user.uuid), "role": role.name})
+    logger.success("Пользователь c телефон номером: %s успешно зарегистрирован c ролью %s", phone_number, role.title)
+    access_token = create_access_token(data={"user_uuid": str(user.uuid), "role": role.title})
+    refresh_token = create_refresh_token(data={"user_uuid": str(user.uuid), "role": role.title})
 
     return {
         "access_token": access_token,
         "refresh_token": refresh_token,
-        "detail": f"Пользователь: {phone_number} успешно зарегистрирован c ролью {role.name}.",
+        "detail": f"Пользователь: {phone_number} успешно зарегистрирован",
     }
 
 
@@ -117,10 +119,10 @@ async def refresh_token(refresh_token: str,
                         db: AsyncSession = Depends(get_db)):
     logger.info("Попытка создания refresh token")
     try:
-        payload = jwt.decode(refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(refresh_token, settings.JWT_SECRET, algorithms=settings.JWT_ALGORITHM)
         user_uuid = payload.get("user_uuid")
-        user_role = payload.get("role")
-        if user_role != "USER":
+        role = payload.get("role")
+        if role != "user":
             logger.error("Не корректная роль")
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Incorrect role")
     except jwt.ExpiredSignatureError:
@@ -129,11 +131,10 @@ async def refresh_token(refresh_token: str,
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Token invalid")
 
-    role = await db.scalar(select(Role).where(Role.name == "USER"))
-
-    new_access_token = create_access_token(data={"user_uuid": user_uuid, "role": role.name})
+    role = await db.scalar(select(Role).where(Role.title == "user"))
+    access_token = create_access_token(data={"user_uuid": user_uuid, "role": role.title})
 
     logger.success("Токен успешно обновлён для пользователя с UUID: %s", user_uuid)
     return {
-        "access_token": new_access_token
+        "access_token": access_token
     }

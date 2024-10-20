@@ -2,7 +2,7 @@ import json
 from fastapi import APIRouter, HTTPException, Response, Request, status
 
 router_translation = APIRouter(
-    tags=["Translation"]
+    tags=["translation"]
 )
 
 SUPPORTED_LANGUAGES = ["en", "ru", "uz"]

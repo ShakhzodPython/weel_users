@@ -11,7 +11,6 @@ from logs.filter import contextual_filter
 from logs.utils import get_client_ip
 from src.authorization.rate_limeter import limiter
 from config.database import get_redis_connection
-from config.settings import TimeMiddleware
 
 app = FastAPI(
     title="Weel Users Microservice",
@@ -22,7 +21,7 @@ app = FastAPI(
     # openapi_url=None
 )
 
-# Регистрация эндпоитов
+# Регистрация эндпоинтов
 app.include_router(routes, prefix="/api/v1")
 
 # Добавляем состояние лимитера к приложению
@@ -30,9 +29,6 @@ app.state.limiter = limiter
 
 # Добавляем обработчик исключений для RateLimitExceeded
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-
-# Добавляем middleware для возвращения в ответе время запроса
-app.add_middleware(TimeMiddleware)
 
 # Добавление СORS
 app.add_middleware(

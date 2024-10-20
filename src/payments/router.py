@@ -9,10 +9,10 @@ from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from config.settings import STPimsApiPartnerKey, LOGIN, PASSWORD
+from config.settings import get_settings
 from logs.logger import logger
 from config.database import get_db
-from config.security import get_current_user, hash_data, is_superuser
+from config.security import get_current_user, is_superuser
 from src.payments.requests import card_response, confirm_card, get_all_cards, create_payment
 from src.payments.response_parser import parse_confirm_id, parse_uzcard_id, parse_card_phone, \
     parse_balance_from_confirm, parse_transaction_id, parse_confirmation
@@ -20,6 +20,10 @@ from src.payments.utils import convert_expiry_date
 from src.payments.redis import save_confirm_id, get_confirm_id, get_card, save_card, save_uzcard_id, get_uzcard_id, \
     save_card_phone, save_balance, get_card_phone, save_transaction_id
 from src.users.models import Card, User
+
+STPimsApiPartnerKey = get_settings().STPimsApiPartnerKey
+LOGIN = get_settings().LOGIN
+PASSWORD = get_settings().PASSWORD
 
 router_payment = APIRouter(
     tags=["Payments"]
