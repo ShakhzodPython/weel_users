@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from languages.routes import router_translation
+from languages.routers import router_translation
 from src.superusers.routers import router_admin
 from src.authorization.routers import router_auth
 from src.users.routers import router_users

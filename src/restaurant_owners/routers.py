@@ -12,7 +12,7 @@ from sqlalchemy.orm import selectinload
 from config.settings import get_settings
 from config.security import create_access_token, create_refresh_token, get_api_key, is_restaurant_owner, is_superuser
 from config.database import get_db
-from languages.routes import load_translations, default_language, get_language_user
+from languages.routers import load_translations, default_language, get_language_user
 from logs.logger import logger
 from src.superusers.utils import validate_password, validate_username
 from src.restaurant_owners.schemas import RestaurantOwnerSchemas, RestaurantOwnerDetailSchemas, RestaurantOwnerUpdate
